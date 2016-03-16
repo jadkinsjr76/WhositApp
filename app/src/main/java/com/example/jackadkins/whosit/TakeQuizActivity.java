@@ -9,5 +9,7 @@ public class TakeQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
+
+        getSupportActionBar().hide();
     }
 }
