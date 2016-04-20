@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,14 +8,83 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jackadkins.whosit.CreateAnswersActivity">
+    tools:context="com.example.jackadkins.whosit.TakeQuizActivity"
+    android:textAlignment="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter answers for Question 1."
-        android:textStyle="bold"
-        android:textSize="20sp"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/enterAnswersTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_answers"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingTop="100dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/a2"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/answer_b"
+                android:textStyle="bold"
+                android:paddingTop="80dp"
+                android:maxLength="20"/>
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:layout_gravity="center_horizontal"
+                android:prompt="@string/spinner_title"
+                android:paddingTop="30dp"/>
+
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/framelayoutanswers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom">
+
+            <Button
+                android:id="@+id/backButtonAnswers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back_button"
+                android:textAlignment="center"
+                android:layout_gravity="bottom|left"/>
+
+            <Button
+                android:id="@+id/nextButtonAnswers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/next_button"
+                android:layout_gravity="bottom|right"
+                android:textAlignment="center"/>
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/doneButtonAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/done_button"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
+

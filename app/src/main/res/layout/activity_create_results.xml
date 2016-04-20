@@ -16,11 +16,11 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/q1"
+            android:id="@+id/enterResult"
+            android:text="@string/enter_result"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Enter Question Here!"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_centerInParent="true"
@@ -33,7 +33,7 @@
             android:gravity="bottom">
 
             <Button
-                android:id="@+id/backButton"
+                android:id="@+id/backButtonResults"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Back"
@@ -41,7 +41,7 @@
                 android:layout_gravity="bottom|left"/>
 
             <Button
-                android:id="@+id/nextButton"
+                android:id="@+id/nextButtonResults"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Next"
@@ -50,14 +50,15 @@
 
         </FrameLayout>
 
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:layout_alignParentRight="true"/>
+        <Button
+            android:id="@+id/doneButtonResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
 </LinearLayout>
+

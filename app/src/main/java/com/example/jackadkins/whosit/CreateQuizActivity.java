@@ -22,7 +22,7 @@ public class CreateQuizActivity extends AppCompatActivity {
                     break;
                 //launch resultsActivity
                 case R.id.enterResultsButton:
-
+                    launchResultsActivity();
                     break;
                 //launch answerActivity
                 case R.id.enterAnswersButton:
@@ -38,6 +38,8 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Button enterResultButton;
     private Button enterAnswerButton;
     private String[] questionArray;
+    private String[] answerArray;
+    private String[] resultArray;
     private String quizName;
 
     private ButtonListener mButtonListener = new ButtonListener();
@@ -81,10 +83,14 @@ public class CreateQuizActivity extends AppCompatActivity {
     }
 
     private void launchResultsActivity(){
-
+        Intent createResultIntent = new Intent(this, CreateResultsActivity.class);
+        createResultIntent.putExtra("resultArray", resultArray);
+        startActivity(createResultIntent);
     }
 
     private void launchAnswerActivity(){
-
+        Intent createAnswerIntent = new Intent(this, CreateAnswersActivity.class);
+        createAnswerIntent.putExtra("answerArray", answerArray);
+        startActivity(createAnswerIntent);
     }
 }

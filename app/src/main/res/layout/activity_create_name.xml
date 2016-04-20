@@ -20,7 +20,7 @@
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Enter a Quiz Name!"
+            android:text="@string/enter_quiz_name"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_centerInParent="true"
@@ -30,7 +30,7 @@
             android:id="@+id/doneQNameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done"
+            android:text="@string/done_button"
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:layout_alignParentRight="true"/>
