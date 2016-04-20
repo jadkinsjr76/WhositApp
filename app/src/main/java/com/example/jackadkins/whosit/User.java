@@ -9,9 +9,28 @@ public class User {
     private String password;
 
     User(String userN, String pass){
-        userId = setId();
+        makeNewUID();
         userName = userN;
         password = pass;
+    }
+
+    User(int uID, String userN, String pass){
+        if(idInDatabase(uID)){
+            makeNewUID();
+        } else{
+            userId = uID;
+        }
+        userName = userN;
+        password = pass;
+    }
+
+    private boolean idInDatabase(int uID) {
+        //Check if the ID is in the database and return true or false
+        return false;
+    }
+
+    private void makeNewUID() {
+        //Generate an ID that isn't already in the DB
     }
 
     protected int getId(){
@@ -23,9 +42,13 @@ public class User {
     protected String getPassword(){
         return password;
     }
-    private int setId(){
-        //Get the ID from the DB
-        return 0;
+    protected boolean setId(int uID){
+        if(idInDatabase(uID)){
+            return false;
+        } else{
+            userId = uID;
+            return true;
+        }
     }
     protected boolean changePassword(String oldPass, String newPass){
         if(oldPass.equals(password)){
