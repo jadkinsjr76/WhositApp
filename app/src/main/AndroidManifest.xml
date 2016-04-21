@@ -35,6 +35,10 @@
         </activity>
         <activity android:name=".CreateResultsActivity">
         </activity>
+        <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".RegisterActivity">
+        </activity>
     </application>
 
 </manifest>
