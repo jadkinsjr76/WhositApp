@@ -4,12 +4,12 @@ public class Question
 {
     private int questionID;
     private int quizID;
-    private String questionTitle;
-    private Answer answer[] = new Answer[8];
+    private String questionText;
+    private Answer[] answer = new Answer[8];
 
-    public Question(String questionTitle)
+    public Question(String questionText)
     {
-        this.questionTitle = questionTitle;
+        this.questionText = questionText;
         for(int i = 0; i < answer.length; i++)
         {
             answer[i].setAnswerName("  ");
@@ -17,14 +17,20 @@ public class Question
         }
     }
 
-    public String getQuestionTitle()
-    {
-        return questionTitle;
+    public Question(String questionText, int questionID, int quizID) {
+        this.questionText = questionText;
+        this.questionID = questionID;
+        this.quizID = quizID;
     }
 
-    public void setQuestionTitle(String newTitle)
+    public String getQuestionText()
     {
-        this.questionTitle = newTitle;
+        return questionText;
+    }
+
+    public void setQuestionText(String questionText)
+    {
+        this.questionText = questionText;
     }
 
     public int getQuestionID()

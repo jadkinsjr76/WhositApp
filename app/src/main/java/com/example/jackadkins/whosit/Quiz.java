@@ -4,15 +4,15 @@ public class Quiz
 {
     private int quizID;
     private int userID;
-    private String quizTitle;
-    private Question question[] = new Question[20];
+    private String name;
+    private Question[] question = new Question[20];
 
-    public Quiz(String quizTitle)
+    public Quiz(String name)
     {
-        this.quizTitle = quizTitle;
+        this.name = name;
         for(int i = 0; i < question.length; i++)
         {
-            question[i].setQuestionTitle(" ");
+            question[i].setQuestionText(" ");
         }
 
     }
@@ -23,7 +23,7 @@ public class Quiz
         if(question.length < 20)
         {
             //What about question[question.length] = q; ?
-            question[question.length] = new Question(q.getQuestionTitle());
+            question[question.length] = new Question(q.getQuestionText());
             return true;
         }
         return false;
@@ -31,7 +31,7 @@ public class Quiz
 
     public void changeQuestion(Question q, int index)
     {
-        question[index].setQuestionTitle(q.getQuestionTitle());
+        question[index].setQuestionText(q.getQuestionText());
     }
 
     public void changeAllQuestions(Question[] questionArray)
@@ -69,16 +69,14 @@ public class Quiz
         userID = newID;
     }
 
-    public String getQuizTitle()
+    public String getName()
     {
-        return quizTitle;
+        return name;
     }
 
-    public void setQuizTitle(String newQuizTitle)
+    public void setName(String name)
     {
-        quizTitle = newQuizTitle;
+        this.name = name;
     }
-
-
 
 }

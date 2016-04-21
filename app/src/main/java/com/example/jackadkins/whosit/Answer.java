@@ -19,6 +19,13 @@ public class Answer
         this.result = result;
     }
 
+    public Answer(String answerName, String result, int answerID, int questionID) {
+        this.answerName = answerName;
+        this.result = result;
+        this.answerID = answerID;
+        this.questionID = questionID;
+    }
+
     public void setAnswerID(int newAnswerID)
     {
         this.answerID = newAnswerID;
