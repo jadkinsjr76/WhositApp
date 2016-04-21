@@ -26,7 +26,6 @@
             -->
         </activity>
         <activity android:name=".CreateQuestionActivity">
-
         </activity>
         <activity android:name=".ProfileActivity"/>
         <activity
@@ -45,6 +44,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".CreateResultsActivity">
         </activity>
     </application>
 

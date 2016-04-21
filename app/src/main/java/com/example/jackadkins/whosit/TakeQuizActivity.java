@@ -16,9 +16,5 @@ public class TakeQuizActivity extends AppCompatActivity
         setContentView(R.layout.activity_take_quiz);
 
         getSupportActionBar().hide();
-
-        QuizXmlParser parser = new QuizXmlParser();
-
-        parser.parseXml(this);
     }
 }
