@@ -35,4 +35,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="usernameEditText">Nchudson95</string>
+    <string name="usernameTextView">Username:</string>
+    <string name="passwordTextView">Password:</string>
+    <string name="loginButton">Login</string>
+    <string name="registerButton">Register</string>
+    <string name="passwordEditText">password</string>
+    <string name="rUsernameEditText" />
+    <string name="rPasswordEditText" />
+    <string name="rConfirmPasswordEditText" />
+    <string name="rRegisterButton">Register</string>
+    <string name="rUsernameTextView">Username:</string>
+    <string name="rPasswordTextView">Password:</string>
+    <string name="rConfirmPasswordTextView">Confirm:</string>
 </resources>

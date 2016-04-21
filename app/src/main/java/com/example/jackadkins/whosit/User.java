@@ -9,7 +9,6 @@ public class User {
     private String password;
 
     User(String userN, String pass){
-        userId = setId();
         userName = userN;
         password = pass;
     }
@@ -23,9 +22,8 @@ public class User {
     protected String getPassword(){
         return password;
     }
-    private int setId(){
-        //Get the ID from the DB
-        return 0;
+    private void setId(int id){
+        userId = id;
     }
     protected boolean changePassword(String oldPass, String newPass){
         if(oldPass.equals(password)){
