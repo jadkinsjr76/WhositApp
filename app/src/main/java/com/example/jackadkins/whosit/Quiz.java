@@ -14,7 +14,13 @@ public class Quiz
         {
             question[i].setQuestionText(" ");
         }
+    }
 
+    public Quiz(String name, int quizID, int userID)
+    {
+        this.name = name;
+        this.quizID = quizID;
+        this.userID = userID;
     }
 
     // adds question and returns true on success false on failure
