@@ -1,18 +1,27 @@
 package com.example.jackadkins.whosit;
 
+import java.util.ArrayList;
+
 public class Quiz
 {
     private int quizID;
     private int userID;
     private String name;
-    private Question[] question = new Question[20];
+   // private Question[] question = new Question[20];
+    private ArrayList<Question> questions = new ArrayList<>();
+    // construction
+    public Quiz()
+    {
+
+    }
 
     public Quiz(String name)
     {
         this.name = name;
-        for(int i = 0; i < question.length; i++)
+        for(int i = 0; i < questions.size(); i++)
         {
-            question[i].setQuestionText(" ");
+            //question[i].setQuestionText(" ");
+            questions.get(i).setQuestionText(" ");
         }
     }
 
@@ -26,10 +35,11 @@ public class Quiz
     // adds question and returns true on success false on failure
     public boolean addQuestion(Question q)
     {
-        if(question.length < 20)
+        if(questions.size() < 20)
         {
             //What about question[question.length] = q; ?
-            question[question.length] = new Question(q.getQuestionText());
+            //question[question.length] = new Question(q.getQuestionText());
+            questions.add(q);
             return true;
         }
         return false;
@@ -37,22 +47,23 @@ public class Quiz
 
     public void changeQuestion(Question q, int index)
     {
-        question[index].setQuestionText(q.getQuestionText());
+        //questions[index].setQuestionText(q.getQuestionText());
+        questions.set(index, q);
     }
 
-    public void changeAllQuestions(Question[] questionArray)
+    public void changeAllQuestions(ArrayList<Question> questionArray)
     {
-        question = questionArray;
+        questions = questionArray;
     }
 
     public Question getQuestion(int index)
     {
-        return question[index];
+        return questions.get(index);
     }
 
-    public Question[] getAllQuestions()
+    public ArrayList<Question> getAllQuestions()
     {
-        return question;
+        return questions;
     }
 
     public void setQuizID(int id)
@@ -85,4 +96,13 @@ public class Quiz
         this.name = name;
     }
 
+    public void setAllQuestions(ArrayList<Question> q)
+    {
+       questions = q;
+    }
+
+    public int getNumQuestions()
+    {
+        return questions.size();
+    }
 }

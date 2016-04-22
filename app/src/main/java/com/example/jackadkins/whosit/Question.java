@@ -7,6 +7,7 @@ public class Question
     private String questionText;
     private Answer[] answer = new Answer[8];
 
+    // construction
     public Question(String questionText)
     {
         this.questionText = questionText;
@@ -17,7 +18,8 @@ public class Question
         }
     }
 
-    public Question(String questionText, int questionID, int quizID) {
+    public Question(String questionText, int questionID, int quizID)
+    {
         this.questionText = questionText;
         this.questionID = questionID;
         this.quizID = quizID;
