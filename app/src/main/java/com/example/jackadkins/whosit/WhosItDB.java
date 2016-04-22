@@ -353,10 +353,48 @@ public class WhosItDB {
 
 
     // INSERT/UPDATE/DELETE METHODS:
+    //Every insert method returns the ID of the row of data being entered
+    //Every Update/Delete method returns the number of rows affected in the table
+    public long insertUser(User user) {
+        ContentValues cv = new ContentValues();
+        cv.put(USER_USERNAME, user.getUserName());
+        cv.put(USER_PASSWORD, user.getPassword());
+
+        this.openWriteableDB();
+        long rowID = db.insert(USER_TABLE, null, cv);
+
+        return rowID;
+    }
+
+    public int updateUser(User user) {
+        ContentValues cv = new ContentValues();
+        cv.put(USER_USERNAME, user.getUserName());
+        cv.put(USER_ID, user.getId());
+        cv.put(USER_PASSWORD, user.getPassword());
+        String   where = USER_ID + " = ?";
+        String[] whereArgs = { String.valueOf(user.getId()) };
+
+        this.openWriteableDB();
+        int rowCount = db.update(USER_TABLE, cv, where, whereArgs);
+        this.closeDB();
+
+        return rowCount;
+    }
+
+    public int deleteUser(long id) {
+        String   where = USER_ID + " = ?";
+        String[] whereArgs = { String.valueOf(id) };
+
+        this.openWriteableDB();
+        int rowCount = db.delete(USER_TABLE, where, whereArgs);
+        this.closeDB();
+
+        return rowCount;
+    }
+
     public long insertQuiz(Quiz quiz) {
         ContentValues cv = new ContentValues();
         cv.put(QUIZ_NAME, quiz.getName());
-        cv.put(QUIZ_ID, quiz.getQuizID());
         cv.put(QUIZ_USER_ID, quiz.getUserID());
 
         this.openWriteableDB();
@@ -396,7 +434,6 @@ public class WhosItDB {
     public long insertQuestion(Question question) {
         ContentValues cv = new ContentValues();
         cv.put(QUESTION_TEXT, question.getQuestionText());
-        cv.put(QUESTION_ID, question.getQuestionID());
         cv.put(QUESTION_QUIZ_ID, question.getQuizID());
 
         this.openWriteableDB();
@@ -435,7 +472,6 @@ public class WhosItDB {
     public long insertAnswer(Answer answer) {
         ContentValues cv = new ContentValues();
         cv.put(ANSWER_TEXT, answer.getAnswerName());
-        cv.put(ANSWER_ID, answer.getAnswerID());
         cv.put(ANSWER_QUESTION_ID, answer.getQuestionID());
 
         this.openWriteableDB();
