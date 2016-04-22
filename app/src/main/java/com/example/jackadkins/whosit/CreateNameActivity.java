@@ -37,8 +37,8 @@ public class CreateNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_name);
 
-        final EditText enterQuizNameEditText = (EditText) findViewById(R.id.enterQuizNameEditText);
-        Button qnDoneButton = (Button) findViewById(R.id.doneQNameButton);
+        enterQuizNameEditText = (EditText) findViewById(R.id.enterQuizNameEditText);
+        qnDoneButton = (Button) findViewById(R.id.doneQNameButton);
 
         qnDoneButton.setOnClickListener(mButtonListener);
 

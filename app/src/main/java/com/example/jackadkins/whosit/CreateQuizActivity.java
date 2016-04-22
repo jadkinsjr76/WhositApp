@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class CreateQuizActivity extends AppCompatActivity {
 
@@ -37,7 +38,9 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Button enterQuestionButton;
     private Button enterResultButton;
     private Button enterAnswerButton;
-    private String[] questionArray;
+    private Quiz newQuiz = new Quiz();
+    private Question[] newQuestionArray = new Question[20];
+    private String[] questionArray = new String[20];
     private String[] answerArray;
     private String[] resultArray;
     private String quizName;
@@ -60,12 +63,20 @@ public class CreateQuizActivity extends AppCompatActivity {
         enterResultButton.setOnClickListener(mButtonListener);
         enterAnswerButton.setOnClickListener(mButtonListener);
 
-        Intent backIntent = getIntent();
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String questionArray = extras.getString("questionArray");
-        }
+        quizName = getIntent().getStringExtra("quizName");
+        newQuiz.setName(quizName);
+        questionArray = getIntent().getStringArrayExtra("questionArray");
+       /* if(questionArray != null){
+            int questionCount = 0;
+            for(int i = 0; i < questionArray.length; i++){
+                if(!questionArray[i].equals(" ") || questionArray[i]!= null){
+                    newQuiz.getQuestion(questionCount).setQuestionText(questionArray[i]);
+                    Toast.makeText(CreateQuizActivity.this, newQuiz.getQuestion(questionCount).getQuestionText(), Toast.LENGTH_SHORT).show();
+                    questionCount++;
 
+                }
+            }
+        }*/
     }
 
     private void launchNameActivity(){
