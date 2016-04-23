@@ -39,7 +39,8 @@
                 android:layout_height="100dp"
                 android:id="@+id/imageView"
                 android:background="#e73b3b"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:src="@drawable/default_profile_pic" />
 
             <TextView
                 android:layout_width="wrap_content"
