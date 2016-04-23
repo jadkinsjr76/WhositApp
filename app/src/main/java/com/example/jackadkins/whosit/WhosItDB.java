@@ -197,7 +197,7 @@ public class WhosItDB {
     }
 
     public ArrayList<Quiz> getQuizzes(int userID) {
-        String where = QUIZ_ID + " = ?";
+        String where = QUIZ_USER_ID + " = ?"; // Originally: QUIZ_ID
         String[] whereArgs = { Integer.toString(userID) };
 
         this.openReadableDB();

@@ -2,7 +2,9 @@ package com.example.jackadkins.whosit;
 
 import android.content.Context;
 import android.drm.DrmStore;
+
 //import android.drm.DrmStore.Action;
+
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,10 +48,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Create and populate a List of planet names.
         ArrayList<String> quizList = new ArrayList<String>();
-        ArrayList<Quiz> quizzes = db.getQuizzes(userID);
+//        ArrayList<Quiz> quizzes = db.getQuizzes(userID);
 
-        for (int i = 0; i < quizzes.size(); i++) {
-            quizList.add(quizzes.get(i).getName());
+        for (int i = 0; i < 10; i++) { // quizzes.size(); i++) {
+            quizList.add("Quiz " + i);
+//            quizList.add(quizzes.get(i).getName());
         }
 
         // Create ArrayAdapter using the planet list.
