@@ -58,7 +58,7 @@ public class WhosItDB {
     public static final int    QUESTION_TEXT_COL = 2;
 
     // Answer Table Constants:
-    public static final String ANSWER_TABLE = "question";
+    public static final String ANSWER_TABLE = "answer";
 
     public static final String ANSWER_ID = "_id";
     public static final int    ANSWER_ID_COL = 0;
@@ -74,24 +74,24 @@ public class WhosItDB {
 
     // CREATE and DROP TABLE statements:
     public static final String CREATE_USER_TABLE = "CREATE TABLE " + USER_TABLE + " (" +
-            USER_ID       + " INTEGER AS PRIMARY KEY AUTOINCREMENT, " +
+            USER_ID       + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             USER_USERNAME + " TEXT   NOT NULL UNIQUE, " +
             USER_PASSWORD + " TEXT   NOT NULL);";
 
     public static final String CREATE_QUIZ_TABLE = "CREATE TABLE " + QUIZ_TABLE + "(" +
-            QUIZ_ID      + " INTEGER AS PRIMARY KEY AUTOINCREMENT, " +
+            QUIZ_ID      + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             QUIZ_USER_ID + " INTEGER   NOT NULL, " +
             QUIZ_NAME    + " TEXT   NOT NULL);";
 
     public static final String CREATE_QUESTION_TABLE = "CREATE TABLE " + QUESTION_TABLE + "(" +
-            QUESTION_ID      + " INTEGER AS PRIMARY KEY AUTOINCREMENT, " +
+            QUESTION_ID      + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             QUESTION_QUIZ_ID + " INTEGER   NOT NULL, " +
             QUESTION_TEXT    + " TEXT   NOT NULL);";
 
     public static final String CREATE_ANSWER_TABLE =  "CREATE TABLE " + ANSWER_TABLE + "(" +
-            ANSWER_ID          + " INTEGER AS PRIMARY KEY AUTOINCREMENT, " +
+            ANSWER_ID          + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             ANSWER_QUESTION_ID + " INTEGER   NOT NULL, " +
-            ANSWER_TEXT        + " TEXT   NOT NULL);" +
+            ANSWER_TEXT        + " TEXT   NOT NULL, " +
             ANSWER_RESULT_TEXT + " TEXT   NOT NULL);";
 
     public static final String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + USER_TABLE;
@@ -196,6 +196,21 @@ public class WhosItDB {
             db.close();
     }
 
+    public User getUser(String username, String password) {
+        String   where = USER_USERNAME + " = ? AND " + USER_PASSWORD + "= ?";
+        String[] whereArgs = { username, password };
+
+        this.openReadableDB();
+        Cursor cursor = db.query(USER_TABLE, null, where, whereArgs, null, null, null);
+        cursor.moveToFirst();
+        User user = getUserFromCursor(cursor);
+        if (cursor != null)
+            cursor.close();
+        this.closeDB();
+
+        return user;
+    }
+
     public ArrayList<Quiz> getQuizzes(int userID) {
         String where = QUIZ_USER_ID + " = ?"; // Originally: QUIZ_ID
         String[] whereArgs = { Integer.toString(userID) };
@@ -296,6 +311,24 @@ public class WhosItDB {
     }
 
     // CURSOR PRIVATE METHODS:
+    private static User getUserFromCursor(Cursor cursor) {
+        // If the cursor is null or there are no more quizzes, return null:
+        if (cursor == null || cursor.getCount() == 0) {
+            return null;
+        }
+
+        // Otherwise, proceed:
+        try {
+            User user = new User(
+                    cursor.getInt(USER_ID_COL),
+                    cursor.getString(USER_NAME_COL),
+                    cursor.getString(USER_PASSWORD_COL));
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     private static Quiz getQuizFromCursor(Cursor cursor) {
         // If the cursor is null or there are no more quizzes, return null:
         if (cursor == null || cursor.getCount() == 0) {

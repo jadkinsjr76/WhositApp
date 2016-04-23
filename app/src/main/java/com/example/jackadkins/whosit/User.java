@@ -13,6 +13,12 @@ public class User {
         password = pass;
     }
 
+    User(int id, String userN, String pass){
+        userId = id;
+        userName = userN;
+        password = pass;
+    }
+
     protected int getId(){
         return userId;
     }
