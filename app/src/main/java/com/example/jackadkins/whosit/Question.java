@@ -1,20 +1,21 @@
 package com.example.jackadkins.whosit;
 
+import java.util.ArrayList;
+
 public class Question
 {
     private int questionID;
     private int quizID;
     private String questionText;
-    private Answer[] answer = new Answer[8];
-
+    private ArrayList<Answer> answers = new ArrayList<>();
     // construction
     public Question(String questionText)
     {
         this.questionText = questionText;
-        for(int i = 0; i < answer.length; i++)
+        for(int i = 0; i < answers.size(); i++)
         {
-            answer[i].setAnswerName("  ");
-            answer[i].setResult(" ");
+            answers.get(i).setAnswerName("  ");
+            answers.get(i).setResult(" ");
         }
     }
 
@@ -57,22 +58,22 @@ public class Question
 
     public void setAnswer(Answer newAnswer, int index)
     {
-        answer[index] = newAnswer;
+        answers.set(index, newAnswer);
     }
 
-    public Answer getAnswer(int index)
+    public ArrayList<Answer> getAnswer(int index)
     {
-        return answer[index];
+        return answers;
     }
 
-    public void setAllAnswers(Answer[] newAnswers)
+    public void setAllAnswers(ArrayList<Answer> newAnswers)
     {
-        answer = newAnswers;
+        answers = newAnswers;
     }
 
-    public Answer[] returnAllAnswers()
+    public ArrayList<Answer> returnAllAnswers()
     {
-        return answer;
+        return answers;
     }
 
 

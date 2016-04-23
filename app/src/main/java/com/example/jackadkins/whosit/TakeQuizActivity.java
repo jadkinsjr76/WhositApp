@@ -39,6 +39,10 @@ public class TakeQuizActivity extends AppCompatActivity
             quiz = db.getQuiz(quizId);
             quiz.setAllQuestions(db.getQuestions(quizId));
 
+            for(int j = 0; j < quiz.getNumQuestions(); j++)
+            {
+                quiz.getQuestion(j).setAllAnswers(db.getAnswers(quiz.getQuestion(j).getQuestionID()));
+            }
         }
     }
 
