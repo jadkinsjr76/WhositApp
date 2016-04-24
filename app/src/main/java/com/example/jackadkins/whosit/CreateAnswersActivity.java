@@ -1,5 +1,12 @@
 package com.example.jackadkins.whosit;
 
+//enter activity
+//retrieve result data
+//if no result data, make user go back to enter results
+//otherwise display result data
+//
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,20 +29,16 @@ import java.util.List;
 public class CreateAnswersActivity extends AppCompatActivity {
 
     private String[] answersArray = new String[80];
-    private int currentQuestion = 0;
     private int mcurrentAnswer = 0;
     private boolean loadData = false;
     private Spinner mSpinner;
     int spinnerPosition = 0;
     private TextView enterAnswerTextView;
-    private EditText answer1EditText;
     private EditText answer2EditText;
-    private EditText answer3EditText;
-    private EditText answer4EditText;
     private Button nextButton;
     private Button backButton;
     private Button doneButton;
-    private String[] resultsArray = new String[8];
+    private String[] resultsArray;
     private ButtonListener mButtonListener = new ButtonListener();
     private List<String> categories = new ArrayList<String>();
 
@@ -45,6 +48,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.nextButtonAnswers:
                     //Enter action here
+
                     break;
 
                 case R.id.backButtonAnswers:
@@ -53,7 +57,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
 
                 //go back to CreateQuizActivity
                 case R.id.doneButtonAnswers:
-
+                    launchActivity();
                     break;
             }
         }
@@ -71,7 +75,12 @@ public class CreateAnswersActivity extends AppCompatActivity {
         backButton = (Button) findViewById(R.id.backButtonAnswers);
         doneButton = (Button) findViewById(R.id.doneButtonAnswers);
         mSpinner = (Spinner) findViewById(R.id.spinner);
-        //mSpinner.setOnItemSelectedListener(this);
+
+        resultsArray = getIntent().getStringArrayExtra("resultArray");
+        if(resultsArray != null){
+            loadData = true;
+        }
+
         setUpSpinnerList();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,6 +90,40 @@ public class CreateAnswersActivity extends AppCompatActivity {
         nextButton.setOnClickListener(mButtonListener);
         backButton.setOnClickListener(mButtonListener);
         doneButton.setOnClickListener(mButtonListener);
+
+        answer2EditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                    enterAnswerResultPair();
+                }
+                return false;
+
+            }
+        });
+
+        answer2EditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                switch (keyCode) {
+                    case KeyEvent.KEYCODE_ENTER:
+                    case KeyEvent.KEYCODE_DPAD_CENTER:
+
+                        enterAnswerResultPair();
+
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(answer2EditText.getWindowToken(), 0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
+
+    }
+
+    private void enterAnswerResultPair(){
 
     }
 
@@ -101,7 +144,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
                 categories.add(resultsArray[i]);
             }
         }else {
-            fillWithDummyData();
+            //fillWithDummyData();
         }
     }
 
@@ -111,6 +154,15 @@ public class CreateAnswersActivity extends AppCompatActivity {
             categories.add(resultsArray[i]);
 
         }
+    }
+
+    private void setUpDisplay(){
+
+    }
+
+    private void launchActivity(){
+        Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
+        startActivity(createQuizIntent);
     }
 
 }

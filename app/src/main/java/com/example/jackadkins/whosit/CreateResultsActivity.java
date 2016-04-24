@@ -115,7 +115,7 @@ public class CreateResultsActivity extends AppCompatActivity {
 
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
-        createQuizIntent.putExtra("resultsArray", resultsArray);
+        createQuizIntent.putExtra("resultArray", resultsArray);
         startActivity(createQuizIntent);
     }
 }

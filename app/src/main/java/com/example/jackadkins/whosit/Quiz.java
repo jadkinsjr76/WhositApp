@@ -7,9 +7,8 @@ public class Quiz
     private int quizID;
     private int userID;
     private String name;
-   // private Question[] question = new Question[20];
     private ArrayList<Question> questions = new ArrayList<>();
-    // construction
+
     public Quiz()
     {
 
@@ -53,7 +52,8 @@ public class Quiz
 
     public void changeAllQuestions(ArrayList<Question> questionArray)
     {
-        questions = questionArray;
+        questions = (ArrayList<Question>)questionArray.clone();
+        
     }
 
     public Question getQuestion(int index)

@@ -27,7 +27,7 @@ public class CreateQuizActivity extends AppCompatActivity {
                     break;
                 //launch answerActivity
                 case R.id.enterAnswersButton:
-
+                    launchAnswerActivity();
                     break;
             }
         }
@@ -39,7 +39,6 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Button enterResultButton;
     private Button enterAnswerButton;
     private Quiz newQuiz = new Quiz();
-    private Question[] newQuestionArray = new Question[20];
     private String[] questionArray = new String[20];
     private String[] answerArray;
     private String[] resultArray;
@@ -64,19 +63,25 @@ public class CreateQuizActivity extends AppCompatActivity {
         enterAnswerButton.setOnClickListener(mButtonListener);
 
         quizName = getIntent().getStringExtra("quizName");
-        newQuiz.setName(quizName);
+        if(quizName!= null) {
+            newQuiz.setName(quizName);
+        }
         questionArray = getIntent().getStringArrayExtra("questionArray");
-       /* if(questionArray != null){
-            int questionCount = 0;
+        if(questionArray != null){
             for(int i = 0; i < questionArray.length; i++){
-                if(!questionArray[i].equals(" ") || questionArray[i]!= null){
-                    newQuiz.getQuestion(questionCount).setQuestionText(questionArray[i]);
-                    Toast.makeText(CreateQuizActivity.this, newQuiz.getQuestion(questionCount).getQuestionText(), Toast.LENGTH_SHORT).show();
-                    questionCount++;
-
+                if(questionArray[i] != null && !questionArray[i].equals(" ")) {
+                    Question question = new Question(questionArray[i]);
+                    newQuiz.addQuestion(question);
                 }
             }
-        }*/
+            /* Print out the new Questions.
+            for(int i = 0; i < newQuiz.getNumQuestions(); i++){
+                Toast.makeText(CreateQuizActivity.this, newQuiz.getQuestion(i).getQuestionText(), Toast.LENGTH_SHORT).show();
+            }*/
+        }
+        resultArray = getIntent().getStringArrayExtra("resultArray");
+
+
     }
 
     private void launchNameActivity(){
