@@ -196,6 +196,21 @@ public class WhosItDB {
             db.close();
     }
 
+    public User getUser(String username) {
+        String   where = USER_USERNAME + " = ?";
+        String[] whereArgs = { username };
+
+        this.openReadableDB();
+        Cursor cursor = db.query(USER_TABLE, null, where, whereArgs, null, null, null);
+        cursor.moveToFirst();
+        User user = getUserFromCursor(cursor);
+        if (cursor != null)
+            cursor.close();
+        this.closeDB();
+
+        return user;
+    }
+
     public User getUser(String username, String password) {
         String   where = USER_USERNAME + " = ? AND " + USER_PASSWORD + "= ?";
         String[] whereArgs = { username, password };
