@@ -20,7 +20,7 @@ public class TakeQuizActivity extends AppCompatActivity
         getSupportActionBar().hide();
 
         Intent intent = getIntent();
-        int quizId = intent.getIntExtra("quizId", -1);
+        int quizId = intent.getIntExtra("QUIZ_ID", -1);
 
         if(quizId >= 0)
         {
