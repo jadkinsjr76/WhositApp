@@ -7,16 +7,11 @@ public class Question
     private int questionID;
     private int quizID;
     private String questionText;
-    private ArrayList<Answer> answers = new ArrayList<>();
+    private ArrayList<Answer> answers = new ArrayList<Answer>();
     // construction
     public Question(String questionText)
     {
         this.questionText = questionText;
-        for(int i = 0; i < answers.size(); i++)
-        {
-            answers.get(i).setAnswerName("  ");
-            answers.get(i).setResult(" ");
-        }
     }
 
     public Question(String questionText, int questionID, int quizID)
@@ -61,9 +56,9 @@ public class Question
         answers.set(index, newAnswer);
     }
 
-    public ArrayList<Answer> getAnswer(int index)
+    public Answer getAnswer(int index)
     {
-        return answers;
+        return answers.get(index);
     }
 
     public void setAllAnswers(ArrayList<Answer> newAnswers)
