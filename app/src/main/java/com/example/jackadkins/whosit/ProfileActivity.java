@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -41,11 +43,17 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
     private Context context;
 
 
-    ArrayList<String>  quizList;
-    ArrayList<Integer> quizIDs;
-    ArrayList<Integer> viewIDs;
-    ArrayList<Quiz>    quizzes;
+    private ArrayList<String>  quizList;
+    private ArrayList<Integer> quizIDs;
+    private ArrayList<Integer> viewIDs;
+    private ArrayList<Quiz>    quizzes;
 
+
+    /**
+     * This initializes and creates the instance of the profile activity.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,28 +75,35 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
         // Display the username to the user:
         usernameTextView.setText(usernameString);
 
-        /**
-         * The code below is example code on how to add to a ListView... It is NOT permanent code.
-         */
-
         // Create and populate a List of planet names.
-        ArrayList<String>  quizList = new ArrayList<String>();
-        ArrayList<Integer> quizIDs = new ArrayList<Integer>();
-        ArrayList<Integer> viewIDs = new ArrayList<Integer>();
-        ArrayList<Quiz>    quizzes = db.getQuizzes(userID);
+        ArrayList<String>        quizList = new ArrayList<String>();
+        final ArrayList<Integer> quizIDs  = new ArrayList<Integer>();
+        ArrayList<Quiz>          quizzes  = db.getQuizzes(userID);
 
-
+        // Iterate through 'quizzes' and add each to the profile:
         for (int i = 0; i < quizzes.size(); i++) {
-            quizList.add("1 - " + quizzes.get(i).getName());
+            quizList.add(quizzes.get(i).getName());
             quizIDs.add(quizzes.get(i).getQuizID());
         }
 
         // Create ArrayAdapter using the planet list.
         listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, quizList);
 
-        // Set the ArrayAdapter as the ListView's adapter.
+        // Set the ArrayAdapter as the ListView's adapter, and add the respective listeners:
         profileQuizzesListView.setAdapter(listAdapter);
+        profileQuizzesListView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Initialize data needed to pull from the database:
+                TextView text = (TextView) view;
+                String viewText = text.getText().toString();
+                int quizID = quizIDs.get(position);
 
+                // Put extra data and then start activity:
+                Intent intent = new Intent(getApplicationContext(), TakeQuizActivity.class);
+                intent.putExtra("QUIZ_ID", quizID);
+                startActivity(intent);
+            }
+        });
     }
 
     // TODO: Fill in.
