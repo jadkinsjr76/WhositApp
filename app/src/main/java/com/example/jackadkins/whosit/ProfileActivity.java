@@ -9,8 +9,6 @@ import android.drm.DrmStore;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -116,37 +114,5 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
         Intent intent = new Intent(this, TakeQuizActivity.class);
         intent.putExtra("QUIZ_ID", quizID);
         startActivity(intent);
-    }
-
-    /**
-     * This overridden method will handle and display the menu for the Profile Activity.
-     *
-     * @param menu
-     * @return
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_profile, menu);
-        return true;
-    }
-
-    /**
-     * This method will handle when something in the menu is clicked.
-     *
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_addQuiz:
-                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
-                intent.putExtra("USER_ID", userID);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-        return true;
     }
 }

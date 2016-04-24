@@ -265,9 +265,9 @@ public class WhosItDB {
         return answers;
     }
 
-    public Quiz getQuiz(int quizID) {
+    public Quiz getQuiz(int userID) {
         String   where = QUIZ_ID + " = ?";
-        String[] whereArgs = { Integer.toString(quizID) };
+        String[] whereArgs = { Integer.toString(userID) };
 
         this.openReadableDB();
         Cursor cursor = db.query(QUIZ_TABLE, null, where, whereArgs, null, null, null);
