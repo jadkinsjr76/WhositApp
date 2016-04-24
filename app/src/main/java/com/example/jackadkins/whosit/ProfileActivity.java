@@ -1,6 +1,7 @@
 package com.example.jackadkins.whosit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.drm.DrmStore;
 
 //import android.drm.DrmStore.Action;
@@ -8,8 +9,12 @@ import android.drm.DrmStore;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -17,25 +22,32 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements OnClickListener {
 
 
     // Define variables for the widgets:
     private ListView profileQuizzesListView;
-    private int userID = 1;
-    private WhosItDB db = new WhosItDB(this.getApplicationContext());
+    private int userID;
+    private WhosItDB db;
 
     // Define additional variables for the class:
     private ArrayAdapter<String> listAdapter;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    private Context context;
+
+
+    ArrayList<String>  quizList;
+    ArrayList<Integer> quizIDs;
+    ArrayList<Integer> viewIDs;
+    ArrayList<Quiz>    quizzes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // DEMO INITIALIZATIONS:
+        userID = 1;
+        db = new WhosItDB(this);
+
         setContentView(R.layout.activity_profile);
 
         // Get references to the widgets:
@@ -47,12 +59,15 @@ public class ProfileActivity extends AppCompatActivity {
          */
 
         // Create and populate a List of planet names.
-        ArrayList<String> quizList = new ArrayList<String>();
-//        ArrayList<Quiz> quizzes = db.getQuizzes(userID);
+        ArrayList<String>  quizList = new ArrayList<String>();
+        ArrayList<Integer> quizIDs = new ArrayList<Integer>();
+        ArrayList<Integer> viewIDs = new ArrayList<Integer>();
+        ArrayList<Quiz>    quizzes = db.getQuizzes(userID);
 
-        for (int i = 0; i < 10; i++) { // quizzes.size(); i++) {
-            quizList.add("Quiz " + i);
-//            quizList.add(quizzes.get(i).getName());
+
+        for (int i = 0; i < quizzes.size(); i++) {
+            quizList.add("1 - " + quizzes.get(i).getName());
+            quizIDs.add(quizzes.get(i).getQuizID());
         }
 
         // Create ArrayAdapter using the planet list.
@@ -60,48 +75,33 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Set the ArrayAdapter as the ListView's adapter.
         profileQuizzesListView.setAdapter(listAdapter);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Profile Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.jackadkins.whosit/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
+    // TODO: Fill in.
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//    }
+//
+//    // TODO: Fill in.
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//    }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onClick(View v) {
+        // Declare and initialize variables:
+        TextView text = (TextView) v;
+        String viewText = text.getText().toString();
+        int index = Integer.parseInt(viewText.split(" ")[0]);
+        int quizID = quizIDs.get(index);
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Profile Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.jackadkins.whosit/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+        // Start the new activity:
+        Intent intent = new Intent(this, TakeQuizActivity.class);
+        intent.putExtra("QUIZ_ID", quizID);
+
+        startActivity(intent);
     }
 }
