@@ -24,7 +24,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-public class ProfileActivity extends AppCompatActivity implements OnClickListener {
+public class ProfileActivity extends AppCompatActivity {
 
 
     // Define variables for the widgets:
@@ -36,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
 
     // Define additional variables for the class:
     private ArrayAdapter<String> listAdapter;
+<<<<<<< Updated upstream
     private Context context;
 
 
@@ -44,6 +45,28 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
     ArrayList<Integer> viewIDs;
     ArrayList<Quiz>    quizzes;
 
+=======
+<<<<<<< HEAD
+    private ArrayList<String>  quizList;
+    private ArrayList<Integer> quizIDs;
+    private ArrayList<Quiz>    quizzes;
+
+    /**
+     * This initializes and creates the instance of the profile activity.
+     *
+     * @param savedInstanceState
+     */
+=======
+    private Context context;
+
+
+    ArrayList<String>  quizList;
+    ArrayList<Integer> quizIDs;
+    ArrayList<Integer> viewIDs;
+    ArrayList<Quiz>    quizzes;
+
+>>>>>>> origin/master
+>>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +74,14 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
         // Get the intent which has started the activity:
         Intent intent = getIntent();
 
-        // Initialize the user's values:
+        // Initialize the user's values using intents:
         userID = intent.getIntExtra("userId", 0);
         usernameString = intent.getStringExtra("username");
+
+        // Start up the database:
         db = new WhosItDB(this);
 
+        // Set the content view to ProfileActivity:
         setContentView(R.layout.activity_profile);
 
         // Get references to the widgets:
@@ -70,11 +96,23 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
          */
 
         // Create and populate a List of planet names.
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        quizList = new ArrayList<String>();
+        quizIDs  = new ArrayList<Integer>();
+        quizzes  = db.getQuizzes(userID);
+=======
+>>>>>>> Stashed changes
         ArrayList<String>  quizList = new ArrayList<String>();
         ArrayList<Integer> quizIDs = new ArrayList<Integer>();
         ArrayList<Integer> viewIDs = new ArrayList<Integer>();
         ArrayList<Quiz>    quizzes = db.getQuizzes(userID);
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 
         for (int i = 0; i < quizzes.size(); i++) {
             quizList.add("1 - " + quizzes.get(i).getName());
@@ -86,7 +124,27 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
 
         // Set the ArrayAdapter as the ListView's adapter.
         profileQuizzesListView.setAdapter(listAdapter);
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< HEAD
+        profileQuizzesListView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Put extra data and then start activity:
+                Intent intent = new Intent(getApplicationContext(), TakeQuizActivity.class);
+                intent.putExtra("QUIZ_ID", quizIDs.get(position));
+
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {}
+
+                startActivity(intent);
+            }
+        });
+=======
+
+>>>>>>> origin/master
+>>>>>>> Stashed changes
     }
 
     // TODO: Fill in.
@@ -101,6 +159,8 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
 //        super.onStop();
 //    }
 
+<<<<<<< HEAD
+=======
     @Override
     public void onClick(View v) {
         // Declare and initialize variables:
@@ -118,6 +178,7 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
         startActivity(intent);
     }
 
+>>>>>>> origin/master
     /**
      * This overridden method will handle and display the menu for the Profile Activity.
      *
@@ -138,13 +199,33 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        // Variable initialization:
+        Intent intent;
+
+        // Switch statement to handle cases:
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
         switch (item.getItemId()) {
             case R.id.action_addQuiz:
                 Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
                 intent.putExtra("USER_ID", userID);
                 startActivity(intent);
                 break;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+            case R.id.action_logout:
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+=======
+>>>>>>> Stashed changes
             default:
+>>>>>>> origin/master
                 break;
         }
         return true;

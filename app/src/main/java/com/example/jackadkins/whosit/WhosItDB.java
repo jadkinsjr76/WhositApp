@@ -245,7 +245,7 @@ public class WhosItDB {
     }
 
     public ArrayList<Question> getQuestions(int quizID) {
-        String where = QUESTION_ID + " = ?";
+        String where = QUIZ_ID + " = ?";
         String[] whereArgs = { Integer.toString(quizID) };
 
         this.openReadableDB();
@@ -263,7 +263,7 @@ public class WhosItDB {
     }
 
     public ArrayList<Answer> getAnswers(int questionID) {
-        String where = ANSWER_ID + " = ?";
+        String where = QUESTION_ID + " = ?";
         String[] whereArgs = { Integer.toString(questionID) };
 
         this.openReadableDB();
@@ -296,7 +296,7 @@ public class WhosItDB {
     }
 
     public Question getQuestion(int quizID) {
-        String   where = QUESTION_ID + " = ?";
+        String   where = QUIZ_ID + " = ?";
         String[] whereArgs = { Integer.toString(quizID) };
 
         this.openReadableDB();
@@ -311,7 +311,7 @@ public class WhosItDB {
     }
 
     public Object getAnswer(int questionID) {
-        String   where = ANSWER_ID + " = ?";
+        String   where = QUESTION_ID + " = ?";
         String[] whereArgs = { Integer.toString(questionID) };
 
         this.openReadableDB();
