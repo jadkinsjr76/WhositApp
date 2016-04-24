@@ -7,7 +7,7 @@ public class Quiz
     private int quizID;
     private int userID;
     private String name;
-    private ArrayList<Question> questions = new ArrayList<>();
+    private ArrayList<Question> questions = new ArrayList<Question>();
 
     public Quiz()
     {
@@ -17,11 +17,11 @@ public class Quiz
     public Quiz(String name)
     {
         this.name = name;
-        for(int i = 0; i < questions.size(); i++)
-        {
-            //question[i].setQuestionText(" ");
-            questions.get(i).setQuestionText(" ");
-        }
+//        for(int i = 0; i < questions.size(); i++)
+//        {
+//            //question[i].setQuestionText(" ");
+//            questions.get(i).setQuestionText(" ");
+//        }
     }
 
     public Quiz(String name, int quizID, int userID)

@@ -35,12 +35,12 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 break;
             case R.id.loginButton:
                 Log.d("LoginActivity", "Login Button Clicked");
-                if(inDB(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
-                    Intent j = new Intent(this, ProfileActivity.class);
-                    j.putExtra("userId", user.getId());
-                    j.putExtra("username", user.getUserName());
-                    startActivity(j);
-                }else{
+                if (inDB(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
+                    Intent intent = new Intent(this, ProfileActivity.class);
+                    intent.putExtra("userId", user.getId());
+                    intent.putExtra("username", user.getUserName());
+                    startActivity(intent);
+                } else {
                     incorrect.setVisibility(View.VISIBLE);
                 }
                 break;
