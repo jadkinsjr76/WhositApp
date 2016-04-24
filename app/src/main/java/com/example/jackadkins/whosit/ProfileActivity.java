@@ -27,7 +27,9 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
 
     // Define variables for the widgets:
     private ListView profileQuizzesListView;
-    private int userID;
+    private TextView usernameTextView;
+    private int      userID;
+    private String   usernameString;
     private WhosItDB db;
 
     // Define additional variables for the class:
@@ -44,15 +46,22 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // DEMO INITIALIZATIONS:
-        userID = 1;
+        // Get the intent which has started the activity:
+        Intent intent = getIntent();
+
+        // Initialize the user's values:
+        userID = intent.getIntExtra("userId", 0);
+        usernameString = intent.getStringExtra("username");
         db = new WhosItDB(this);
 
         setContentView(R.layout.activity_profile);
 
         // Get references to the widgets:
         profileQuizzesListView = (ListView) findViewById(R.id.profile_quizzes_listView);
+        usernameTextView = (TextView) findViewById(R.id.username_profile_textView);
 
+        // Display the username to the user:
+        usernameTextView.setText(usernameString);
 
         /**
          * The code below is example code on how to add to a ListView... It is NOT permanent code.
@@ -98,10 +107,12 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
         int index = Integer.parseInt(viewText.split(" ")[0]);
         int quizID = quizIDs.get(index);
 
+        // Debug:
+        System.out.println("DEBUG - quizID: " + quizID);
+
         // Start the new activity:
         Intent intent = new Intent(this, TakeQuizActivity.class);
         intent.putExtra("QUIZ_ID", quizID);
-
         startActivity(intent);
     }
 }

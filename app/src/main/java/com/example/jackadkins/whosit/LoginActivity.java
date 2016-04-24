@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 if(inDB(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
                     Intent j = new Intent(this, ProfileActivity.class);
                     j.putExtra("userId", user.getId());
+                    j.putExtra("username", user.getUserName());
                     startActivity(j);
                 }else{
                     incorrect.setVisibility(View.VISIBLE);
@@ -50,10 +51,10 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private boolean inDB(String userName, String password) {
         Log.d("LoginActivity", "inDB implemented");
         user = db.getUser(userName, password);
-        if(user != null){
+        if(user != null) {
             Log.d("LoginActivity", "user found");
             return true;
-        } else{
+        } else {
             Log.d("LoginActivity", "user not found");
             return false;
         }
