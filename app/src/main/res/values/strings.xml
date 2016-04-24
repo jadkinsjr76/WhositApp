@@ -50,4 +50,5 @@
     <string name="rConfirmPasswordTextView">Confirm:</string>
     <string name="incorrectTextView">Username or password incorrect</string>
     <string name="action_addQuiz">Add Quiz</string>
+    <string name="action_logout">Logout</string>
 </resources>

@@ -4,11 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.jackadkins.whosit.ProfileActivity">
 
-    <!-- Add new quiz button should appear, if room -->
+    <!-- Add new quiz button should appear, if room. -->
     <item
         android:id="@+id/action_addQuiz"
         android:icon="@drawable/ic_add_circle_white_48dp"
         android:title="@string/action_addQuiz"
+        app:showAsAction="ifRoom"
+        style="?android:borderlessButtonStyle" />
+
+    <!-- Provide a logout button for users, if room. -->
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/action_logout"
         app:showAsAction="ifRoom"
         style="?android:borderlessButtonStyle" />
 

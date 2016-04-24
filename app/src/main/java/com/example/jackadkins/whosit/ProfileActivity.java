@@ -9,6 +9,7 @@ import android.drm.DrmStore;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -104,13 +106,13 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
     @Override
     public void onClick(View v) {
         // Declare and initialize variables:
-        TextView text = (TextView) v;
-        String viewText = text.getText().toString();
-        int index = Integer.parseInt(viewText.split(" ")[0]);
+        Button button = (Button) v;
+        String viewText = button.getText().toString();
+        int index = Integer.parseInt(viewText.split(" ")[0]) - 1;
         int quizID = quizIDs.get(index);
 
         // Debug:
-        System.out.println("DEBUG - quizID: " + quizID);
+        Toast.makeText(ProfileActivity.this, "DEBUG - quizID: " + quizID, Toast.LENGTH_SHORT).show();
 
         // Start the new activity:
         Intent intent = new Intent(this, TakeQuizActivity.class);
@@ -138,12 +140,22 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Variable initialization:
+        Intent intent;
+
         switch (item.getItemId()) {
             case R.id.action_addQuiz:
-                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
                 intent.putExtra("USER_ID", userID);
                 startActivity(intent);
                 break;
+
+            case R.id.action_logout:
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }
