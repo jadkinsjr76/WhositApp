@@ -35,10 +35,10 @@
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="@string/answer_b"
+                android:text="@string/enter_answer"
                 android:textStyle="bold"
                 android:paddingTop="80dp"
-                android:maxLength="20"/>
+                android:maxLength="50"/>
 
             <Spinner
                 android:layout_width="fill_parent"

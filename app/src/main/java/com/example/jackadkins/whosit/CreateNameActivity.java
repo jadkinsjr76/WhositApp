@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CreateNameActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class CreateNameActivity extends AppCompatActivity {
         public void onClick(View v){
             switch (v.getId()){
                 case R.id.doneQNameButton:
+                    enterQuizName();
                     launchCreateQuizAct();
                     break;
             }
@@ -30,7 +32,15 @@ public class CreateNameActivity extends AppCompatActivity {
     private EditText enterQuizNameEditText;
     private Button qnDoneButton;
     private String quizName;
+    private int userid = -1;
+    private int quizid = -1;
+    private Quiz checkQuiz = new Quiz();
+    private String[] answersArray = new String[80];
+    private String[] resultsArrayMap = new String[80];
+    private String[] questionArray = new String[20];
+    private String[] resultsArray = new String[8];
     private ButtonListener mButtonListener = new ButtonListener();
+    private WhosItDB db = new WhosItDB(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +49,22 @@ public class CreateNameActivity extends AppCompatActivity {
 
         enterQuizNameEditText = (EditText) findViewById(R.id.enterQuizNameEditText);
         qnDoneButton = (Button) findViewById(R.id.doneQNameButton);
-
         qnDoneButton.setOnClickListener(mButtonListener);
+
+
+        userid = getIntent().getIntExtra("USER_ID", -1);
+        quizName = getIntent().getStringExtra("quizName");
+        if(quizName == null){
+           quizName = "Default Quiz Name.";
+        }
+
 
         enterQuizNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                    enterQuizName();
+                    //enterQuizName();
                 }
                 return false;
 
@@ -61,7 +78,7 @@ public class CreateNameActivity extends AppCompatActivity {
                     case KeyEvent.KEYCODE_ENTER:
                     case KeyEvent.KEYCODE_DPAD_CENTER:
 
-                        enterQuizName();
+                        //enterQuizName();
 
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(enterQuizNameEditText.getWindowToken(), 0);
@@ -75,11 +92,26 @@ public class CreateNameActivity extends AppCompatActivity {
 
     private void enterQuizName(){
         quizName = enterQuizNameEditText.getText().toString();
+        Quiz quiz = new Quiz(quizName);
+        if(userid != -1){
+            quiz.setUserID(userid);
+            quiz.setQuizID((int)db.insertQuiz(quiz));
+        }
+        quizid = quiz.getQuizID();
+
+        checkQuiz = db.getQuiz(quizid);
+        Toast.makeText(CreateNameActivity.this, checkQuiz.getName(), Toast.LENGTH_SHORT).show();
+
     }
 
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("quizName", quizName);
+        createQuizIntent.putExtra("answerArray", answersArray);
+        createQuizIntent.putExtra("resultsMap", resultsArrayMap);
+        createQuizIntent.putExtra("questionArray", questionArray);
+        createQuizIntent.putExtra("resultArray", resultsArray);
+        createQuizIntent.putExtra("QUIZ_ID",quizid);
         startActivity(createQuizIntent);
     }
 
