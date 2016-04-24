@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +31,18 @@ public class CreateAnswersActivity extends AppCompatActivity {
 
     private String[] answersArray = new String[80];
     private int mcurrentAnswer = 0;
-    private boolean loadData = false;
+    private int mcurrentQuestion = 0;
     private Spinner mSpinner;
     int spinnerPosition = 0;
     private TextView enterAnswerTextView;
-    private EditText answer2EditText;
+    private EditText enterAnswerEditText;
     private Button nextButton;
     private Button backButton;
     private Button doneButton;
-    private String[] resultsArray;
+    private String quizName;
+    private String[] questionArray = new String[20];
+    private String[] resultsArray = new String[8];
+    private String[] resultsArrayMap = new String[80];
     private ButtonListener mButtonListener = new ButtonListener();
     private List<String> categories = new ArrayList<String>();
 
@@ -48,11 +52,33 @@ public class CreateAnswersActivity extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.nextButtonAnswers:
                     //Enter action here
-
+                    if(resultsArray == null || answersArray == null){break;}
+                    enterAnswerResultPair();
+                    if(mcurrentAnswer == 79){break;}
+                    mcurrentAnswer++;
+                    if(answersArray[mcurrentAnswer].equals("") || answersArray[mcurrentAnswer].equals(" ")){
+                        if(mcurrentAnswer%4 == 0){
+                            mcurrentQuestion++;
+                            enterAnswerEditText.setText("Enter Answer A for Question " + (mcurrentQuestion + 1) + ".");
+                        }else if(mcurrentAnswer%4 == 1){
+                            enterAnswerEditText.setText("Enter Answer B for Question " + (mcurrentQuestion + 1) + ".");
+                        }else if(mcurrentAnswer%4 == 2){
+                            enterAnswerEditText.setText("Enter Answer C for Question " + (mcurrentQuestion + 1) + ".");
+                        }else{
+                            enterAnswerEditText.setText("Enter Answer D for Question " + (mcurrentQuestion + 1) + ".");
+                        }
+                    }else{
+                        enterAnswerEditText.setText(answersArray[mcurrentAnswer]);
+                    }
                     break;
 
                 case R.id.backButtonAnswers:
                     //Enter action here
+                    if(resultsArray == null || answersArray == null){break;}
+                    enterAnswerResultPair();
+                    if(mcurrentAnswer == 0){break;}
+                    mcurrentAnswer--;
+                    enterAnswerEditText.setText(answersArray[mcurrentAnswer]);
                     break;
 
                 //go back to CreateQuizActivity
@@ -70,15 +96,23 @@ public class CreateAnswersActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         enterAnswerTextView = (TextView) findViewById(R.id.enterAnswersTextView);
-        answer2EditText = (EditText) findViewById(R.id.a2);
+        enterAnswerEditText = (EditText) findViewById(R.id.a2);
         nextButton = (Button) findViewById(R.id.nextButtonAnswers);
         backButton = (Button) findViewById(R.id.backButtonAnswers);
         doneButton = (Button) findViewById(R.id.doneButtonAnswers);
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
+        quizName = getIntent().getStringExtra("quizName");
+        questionArray = getIntent().getStringArrayExtra("questionArray");
+        answersArray = getIntent().getStringArrayExtra("answerArray");
+        resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
         resultsArray = getIntent().getStringArrayExtra("resultArray");
-        if(resultsArray != null){
-            loadData = true;
+
+        if(answersArray == null){
+            answersArray = new String[80];
+            for(int i = 0; i < answersArray.length; i++){
+                answersArray[i] = " ";
+            }
         }
 
         setUpSpinnerList();
@@ -91,7 +125,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
         backButton.setOnClickListener(mButtonListener);
         doneButton.setOnClickListener(mButtonListener);
 
-        answer2EditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        enterAnswerEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -103,7 +137,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
             }
         });
 
-        answer2EditText.setOnKeyListener(new View.OnKeyListener() {
+        enterAnswerEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 switch (keyCode) {
@@ -113,7 +147,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
                         enterAnswerResultPair();
 
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(answer2EditText.getWindowToken(), 0);
+                        imm.hideSoftInputFromWindow(enterAnswerEditText.getWindowToken(), 0);
                         return true;
 
                 }
@@ -124,6 +158,10 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void enterAnswerResultPair(){
+        if(answersArray!= null && resultsArrayMap!= null){
+            answersArray[mcurrentAnswer] = enterAnswerEditText.getText().toString();
+            resultsArrayMap[mcurrentAnswer] = mSpinner.getSelectedItem().toString();
+        }
 
     }
 
@@ -139,29 +177,22 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void setUpSpinnerList(){
-        if(loadData){
+        if(resultsArray != null){
             for(int i = 0; i < resultsArray.length; i++){
                 categories.add(resultsArray[i]);
             }
-        }else {
-            //fillWithDummyData();
+        }else{
+            Toast.makeText(CreateAnswersActivity.this, "Please go back and enter your Results first.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void fillWithDummyData(){
-        for(int i = 0; i < resultsArray.length; i++){
-            resultsArray[i] = ("" + i);
-            categories.add(resultsArray[i]);
-
-        }
-    }
-
-    private void setUpDisplay(){
-
     }
 
     private void launchActivity(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
+        createQuizIntent.putExtra("answerArray", answersArray);
+        createQuizIntent.putExtra("resultsMap", resultsArrayMap);
+        createQuizIntent.putExtra("quizName", quizName);
+        createQuizIntent.putExtra("questionArray", questionArray);
+        createQuizIntent.putExtra("resultArray", resultsArray);
         startActivity(createQuizIntent);
     }
 

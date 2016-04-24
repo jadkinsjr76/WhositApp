@@ -50,6 +50,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
     }
 
     private String[] myStringArray = {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "};
+    private String[] answersArray = new String[80];
+    private String[] resultsArrayMap = new String[80];
+    private String quizName;
+    private String[] resultsArray = new String[8];
+    private String[] questionArray = new String[20];
     private int currentQuestion = 0;
     private EditText questionEditText;
     private Button nextButton;
@@ -72,6 +77,16 @@ public class CreateQuestionActivity extends AppCompatActivity {
         nextButton.setOnClickListener(mButtonListener);
         backButton.setOnClickListener(mButtonListener);
         doneButton.setOnClickListener(mButtonListener);
+
+        quizName = getIntent().getStringExtra("quizName");
+        questionArray = getIntent().getStringArrayExtra("questionArray");
+        answersArray = getIntent().getStringArrayExtra("answerArray");
+        resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
+        resultsArray = getIntent().getStringArrayExtra("resultArray");
+
+        if(questionArray != null){
+            myStringArray = questionArray;
+        }
 
         questionEditText.setOnEditorActionListener(new OnEditorActionListener() {
 
@@ -113,6 +128,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("questionArray", myStringArray);
+        createQuizIntent.putExtra("answerArray", answersArray);
+        createQuizIntent.putExtra("resultsMap", resultsArrayMap);
+        createQuizIntent.putExtra("quizName", quizName);
+        createQuizIntent.putExtra("resultArray", resultsArray);
         startActivity(createQuizIntent);
     }
 }

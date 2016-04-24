@@ -18,6 +18,10 @@ public class CreateResultsActivity extends AppCompatActivity {
     private Button backButton;
     private Button doneButton;
     private String[] resultsArray = new String[8];
+    private String[] answersArray = new String[80];
+    private String[] resultsArrayMap = new String[80];
+    private String quizName;
+    private String[] questionArray = new String[20];
     private int mcurrentResult = 0;
     private EditText resultsEditText;
     private ButtonListener mButtonListener = new ButtonListener();
@@ -55,14 +59,25 @@ public class CreateResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_results);
 
-        for(int i = 0; i < resultsArray.length; i++){
-            resultsArray[i] = " ";
-        }
+
 
         nextButton = (Button) findViewById(R.id.nextButtonResults);
         backButton = (Button) findViewById(R.id.backButtonResults);
         doneButton = (Button) findViewById(R.id.doneButtonResults);
         resultsEditText = (EditText) findViewById(R.id.enterResult);
+
+        quizName = getIntent().getStringExtra("quizName");
+        questionArray = getIntent().getStringArrayExtra("questionArray");
+        answersArray = getIntent().getStringArrayExtra("answerArray");
+        resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
+        resultsArray = getIntent().getStringArrayExtra("resultArray");
+
+        if(resultsArray == null){
+            resultsArray = new String[8];
+            for(int i = 0; i < resultsArray.length; i++){
+                resultsArray[i] = " ";
+            }
+        }
 
         nextButton.setOnClickListener(mButtonListener);
         backButton.setOnClickListener(mButtonListener);
@@ -116,6 +131,10 @@ public class CreateResultsActivity extends AppCompatActivity {
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("resultArray", resultsArray);
+        createQuizIntent.putExtra("answerArray", answersArray);
+        createQuizIntent.putExtra("resultsMap", resultsArrayMap);
+        createQuizIntent.putExtra("quizName", quizName);
+        createQuizIntent.putExtra("questionArray", questionArray);
         startActivity(createQuizIntent);
     }
 }

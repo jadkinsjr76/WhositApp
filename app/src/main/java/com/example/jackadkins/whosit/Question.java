@@ -61,9 +61,8 @@ public class Question
         answers.set(index, newAnswer);
     }
 
-    public ArrayList<Answer> getAnswer(int index)
-    {
-        return answers;
+    public Answer getAnswer(int index){
+        return answers.get(index);
     }
 
     public void setAllAnswers(ArrayList<Answer> newAnswers)
@@ -71,7 +70,7 @@ public class Question
         answers = newAnswers;
     }
 
-    public ArrayList<Answer> returnAllAnswers()
+    public ArrayList<Answer> getAllAnswers()
     {
         return answers;
     }
