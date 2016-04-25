@@ -41,6 +41,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Button enterAnswerButton;
     private Quiz newQuiz;
     private int userid = -1;
+    private int quizid = -1;
     private String[] questionArray = new String[20];
     private String[] answerArray = new String[80];
     private String[] resultMap = new String[80];
@@ -66,27 +67,7 @@ public class CreateQuizActivity extends AppCompatActivity {
 
         //Get userID
         userid = getIntent().getIntExtra("USER_ID", -1);
-
-        //Get quizname
-        quizName = getIntent().getStringExtra("quizName");
-
-        // get question array
-        questionArray = getIntent().getStringArrayExtra("questionArray");
-
-        //Downsize questions (similar to results)
-        if(questionArray != null){
-            int questionCount = 0;
-            for(int i = 0; i < questionArray.length; i++){
-                if(questionArray[i] != null && !questionArray[i].equals(" ") && !questionArray[i].equals("")) {
-                    questionCount++;
-                }
-            }
-            String[] newQuestionArray = new String[questionCount];
-            for(int i = 0; i < questionCount; i++){
-                newQuestionArray[i] = questionArray[i];
-            }
-            questionArray = newQuestionArray;
-        }
+        quizid = getIntent().getIntExtra("QUIZ_ID", -1);
 
         // get results
         resultArray = getIntent().getStringArrayExtra("resultArray");
@@ -112,29 +93,7 @@ public class CreateQuizActivity extends AppCompatActivity {
         //get mapped results array
         resultMap = getIntent().getStringArrayExtra("resultsMap");
 
-        //Something along the line of
-        if(quizName != null && questionArray != null && resultMap != null && answerArray != null){
-            Toast.makeText(CreateQuizActivity.this, "We can make a quiz now.", Toast.LENGTH_SHORT).show();
-            //create new quiz with quizName. create questions create Answers and put the results in the answers
-            newQuiz = new Quiz();
-            newQuiz.setName(quizName);
-            for(int i = 0; i < questionArray.length; i++){
-                Question question = new Question(questionArray[i]);
-                newQuiz.addQuestion(question);
-            }
-            int answerCount = 0;
-            for(int i = 0; i < newQuiz.getNumQuestions(); i++){
-                Toast.makeText(CreateQuizActivity.this, "I made it here.", Toast.LENGTH_SHORT).show();
-                for(int j = 0; j < 4; j++){
-                    if(answerArray[answerCount] != null || !answerArray[answerCount].equals("") || !answerArray[answerCount].equals(" ")){
-                        Answer answer = new Answer(answerArray[answerCount], resultMap[answerCount]);
-                        newQuiz.getQuestion(i).setAnswer(answer, j);
-                        Toast.makeText(CreateQuizActivity.this, newQuiz.getQuestion(i).getAnswer(j).getAnswerName(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
 
-        }
     }
 
     private void launchNameActivity(){
@@ -154,6 +113,11 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     private void launchQuestionActivity(){
         Intent createQuestionIntent = new Intent(this, CreateQuestionActivity.class);
+        if(quizid != -1){
+            createQuestionIntent.putExtra("QUIZ_ID", quizid);
+        }
+
+
         createQuestionIntent.putExtra("quizName", quizName);
         createQuestionIntent.putExtra("questionArray", questionArray);
         createQuestionIntent.putExtra("answerArray", answerArray);

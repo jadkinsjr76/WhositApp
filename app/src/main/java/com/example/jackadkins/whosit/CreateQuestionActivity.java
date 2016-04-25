@@ -55,6 +55,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private String quizName = "";
     private String[] resultsArray = new String[8];
     private String[] questionArray = new String[20];
+    private int quizid = -1;
     private int currentQuestion = 0;
     private EditText questionEditText;
     private Button nextButton;
