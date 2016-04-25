@@ -28,7 +28,7 @@ public class User {
     protected String getPassword(){
         return password;
     }
-    private void setId(int id){
+    protected void setId(int id){
         userId = id;
     }
     protected boolean changePassword(String oldPass, String newPass){
