@@ -28,38 +28,54 @@
             android:textStyle="bold"
             android:textSize="24dp" />
 
-        <RadioButton
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New RadioButton"
-            android:id="@+id/answer_radio1"
-            android:layout_weight="0.08"
-            android:minHeight="25dp"
-            android:checked="false"/>
+            android:layout_weight=".15"
+            android:id="@+id/rg_group">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New RadioButton"
-            android:id="@+id/answer_radio2"
-            android:layout_weight="0.04"
-            android:minHeight="25dp"
-            android:checked="false"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New RadioButton"
+                android:id="@+id/answer_radio1"
+                android:layout_weight="0.08"
+                android:minHeight="25dp"
+                android:checked="false"/>
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New RadioButton"
-            android:id="@+id/answer_radio3"
-            android:layout_weight="0.07"
-            android:minHeight="25dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New RadioButton"
+                android:id="@+id/answer_radio2"
+                android:layout_weight="0.04"
+                android:minHeight="25dp"
+                android:checked="false"/>
 
-        <RadioButton
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New RadioButton"
+                android:id="@+id/answer_radio3"
+                android:layout_weight="0.07"
+                android:minHeight="25dp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New RadioButton"
+                android:id="@+id/answer_radio4"
+                android:layout_weight="0.05"
+                android:minHeight="25dp"/>
+        </RadioGroup>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New RadioButton"
-            android:id="@+id/answer_radio4"
-            android:layout_weight="0.05"
-            android:minHeight="25dp"/>
+            android:text="Next"
+            android:id="@+id/buttonNext"
+            android:textStyle="bold"/>
+
     </LinearLayout>
 </RelativeLayout>

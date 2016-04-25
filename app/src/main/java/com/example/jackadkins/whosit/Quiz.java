@@ -119,4 +119,38 @@ public class Quiz
         results.add(result);
         keys.add(0);
     }
+
+    public int searchResult(String search)
+    {
+        for(int j = 0; j < results.size(); j++)
+        {
+            if(results.get(j).equals(search))
+            {
+                return j;
+            }
+        }
+
+        return -1;
+    }
+
+    public void incrementKey(int key)
+    {
+        int temp = keys.get(key);
+        keys.set(key, temp++);
+    }
+
+    public String findMaxResult()
+    {
+        int max = 0;
+
+        for(int j = 0; j < keys.size(); j++)
+        {
+            if(keys.get(j) > max)
+            {
+                max = keys.get(j);
+            }
+        }
+
+        return results.get(max);
+    }
 }

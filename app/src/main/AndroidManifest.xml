@@ -27,7 +27,6 @@
         <activity android:name=".CreateAnswersActivity">
         </activity>
         <activity android:name=".DebugActivity">
-
         </activity>
         <activity android:name=".CreateResultsActivity">
         </activity>
@@ -39,6 +38,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity">
+        </activity>
+        <activity android:name=".ResultActivity">
         </activity>
     </application>
 

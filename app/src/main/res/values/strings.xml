@@ -41,9 +41,9 @@
     <string name="loginButton">Login</string>
     <string name="registerButton">Register</string>
     <string name="passwordEditText">password</string>
-    <string name="rUsernameEditText" />
-    <string name="rPasswordEditText" />
-    <string name="rConfirmPasswordEditText" />
+    <string name="rUsernameEditText"/>
+    <string name="rPasswordEditText"/>
+    <string name="rConfirmPasswordEditText"/>
     <string name="rRegisterButton">Register</string>
     <string name="rUsernameTextView">Username:</string>
     <string name="rPasswordTextView">Password:</string>
