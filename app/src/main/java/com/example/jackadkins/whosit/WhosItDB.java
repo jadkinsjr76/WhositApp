@@ -263,7 +263,7 @@ public class WhosItDB {
     }
 
     public ArrayList<Answer> getAnswers(int questionID) {
-        String where = ANSWER_ID + " = ?";
+        String where = QUESTION_ID + " = ?";
         String[] whereArgs = { Integer.toString(questionID) };
 
         this.openReadableDB();
