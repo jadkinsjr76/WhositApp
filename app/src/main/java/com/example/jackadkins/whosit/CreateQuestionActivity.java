@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                         break;
                     }
                     currentQuestion++;
-                    if(myStringArray[currentQuestion].equals(" ")){
+                    if(myStringArray[currentQuestion] == null || myStringArray[currentQuestion].equals(" ")){
                         questionEditText.setText("Enter Question" + " " + (currentQuestion + 1));
                     }else{
                         questionEditText.setText(myStringArray[currentQuestion]);
@@ -50,18 +51,16 @@ public class CreateQuestionActivity extends AppCompatActivity {
     }
 
     private String[] myStringArray = {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "};
-    private String[] answersArray = new String[80];
-    private String[] resultsArrayMap = new String[80];
-    private String quizName = "";
-    private String[] resultsArray = new String[8];
     private String[] questionArray = new String[20];
     private int quizid = -1;
+    private int questionID = -1;
     private int currentQuestion = 0;
     private EditText questionEditText;
     private Button nextButton;
     private Button backButton;
     private Button doneButton;
     private ButtonListener mButtonListener = new ButtonListener();
+    private WhosItDB db = new WhosItDB(this);
 
 
     @Override
@@ -79,11 +78,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
         backButton.setOnClickListener(mButtonListener);
         doneButton.setOnClickListener(mButtonListener);
 
-        quizName = getIntent().getStringExtra("quizName");
         questionArray = getIntent().getStringArrayExtra("questionArray");
-        answersArray = getIntent().getStringArrayExtra("answerArray");
-        resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
-        resultsArray = getIntent().getStringArrayExtra("resultArray");
+
+        quizid = getIntent().getIntExtra("QUIZ_ID", -1);
 
         if(questionArray != null){
             myStringArray = questionArray;
@@ -94,7 +91,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                    enterQuestion();
+                    //enterQuestion();
                 }
                 return false;
 
@@ -108,7 +105,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     case KeyEvent.KEYCODE_ENTER:
                     case KeyEvent.KEYCODE_DPAD_CENTER:
 
-                        enterQuestion();
+                       // enterQuestion();
 
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(questionEditText.getWindowToken(), 0);
@@ -118,21 +115,25 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 
     private void enterQuestion(){
         myStringArray[currentQuestion] = questionEditText.getText().toString();
+        Toast.makeText(CreateQuestionActivity.this, "Triggered", Toast.LENGTH_SHORT).show();
+        if(quizid != -1){
+            Question question = new Question(myStringArray[currentQuestion]);
+            question.setQuizID(quizid);
+            question.setQuestionID((int)db.insertQuestion(question));
+            questionID = question.getQuestionID();
+            Toast.makeText(CreateQuestionActivity.this, db.getQuestion(question.getQuestionID()).getQuestionText(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("questionArray", myStringArray);
-        createQuizIntent.putExtra("answerArray", answersArray);
-        createQuizIntent.putExtra("resultsMap", resultsArrayMap);
-        createQuizIntent.putExtra("quizName", quizName);
-        createQuizIntent.putExtra("resultArray", resultsArray);
+        createQuizIntent.putExtra("QUESTION_ID", questionID);
+
         startActivity(createQuizIntent);
     }
 }

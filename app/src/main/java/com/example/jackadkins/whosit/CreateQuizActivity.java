@@ -31,6 +31,9 @@ public class CreateQuizActivity extends AppCompatActivity {
                 case R.id.enterAnswersButton:
                     launchAnswerActivity();
                     break;
+                //launch profileActivity
+                case R.id.finishButton:
+                    launchProfileActivity();
             }
         }
     }
@@ -39,6 +42,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Button enterQuestionButton;
     private Button enterResultButton;
     private Button enterAnswerButton;
+    private Button finishButton;
     private Quiz newQuiz;
     private int userid = -1;
     private int quizid = -1;
@@ -59,11 +63,14 @@ public class CreateQuizActivity extends AppCompatActivity {
         enterQuestionButton = (Button) findViewById(R.id.enterQuestionsButton);
         enterResultButton = (Button) findViewById(R.id.enterResultsButton);
         enterAnswerButton = (Button) findViewById(R.id.enterAnswersButton);
+        finishButton = (Button) findViewById(R.id.finishButton);
+
 
         enterNameButton.setOnClickListener(mButtonListener);
         enterQuestionButton.setOnClickListener(mButtonListener);
         enterResultButton.setOnClickListener(mButtonListener);
         enterAnswerButton.setOnClickListener(mButtonListener);
+        finishButton.setOnClickListener(mButtonListener);
 
         //Get userID
         userid = getIntent().getIntExtra("USER_ID", -1);
@@ -147,7 +154,8 @@ public class CreateQuizActivity extends AppCompatActivity {
     }
 
     private void launchProfileActivity(){
-
+        Intent profileIntent = new Intent(this, ProfileActivity.class);
+        startActivity(profileIntent);
     }
 
     private void enterIntoDB(){
