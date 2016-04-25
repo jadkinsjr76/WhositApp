@@ -22,17 +22,17 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="When do you listen to music, why do you often listen to it?"
-            android:id="@+id/textView"
-            android:background="#00ffc6"
+            android:text="question_text"
+            android:id="@+id/quiz_question_textView"
             android:layout_weight=".15"
-            />
+            android:textStyle="bold"
+            android:textSize="24dp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/radioButton"
+            android:id="@+id/answer_radio1"
             android:layout_weight="0.08"
             android:minHeight="25dp"/>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/radioButton2"
+            android:id="@+id/answer_radio2"
             android:layout_weight="0.04"
             android:minHeight="25dp"/>
 
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/radioButton3"
+            android:id="@+id/answer_radio3"
             android:layout_weight="0.07"
             android:minHeight="25dp"/>
 
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/radioButton4"
+            android:id="@+id/answer_radio4"
             android:layout_weight="0.05"
             android:minHeight="25dp"/>
     </LinearLayout>
