@@ -213,7 +213,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void launchActivity(){
-        if(mcurrentQuestion2 < maxQuestions){
+        if(mcurrentQuestion2+1 < maxQuestions){
             errorAnswer.setVisibility(View.VISIBLE);
         }else{
             Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);

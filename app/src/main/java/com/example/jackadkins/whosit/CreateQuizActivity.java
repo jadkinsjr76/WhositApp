@@ -80,7 +80,6 @@ public class CreateQuizActivity extends AppCompatActivity {
         userid = getIntent().getIntExtra("USER_ID", -1);
         quizid = getIntent().getIntExtra("QUIZ_ID", -1);
         usernameString = getIntent().getStringExtra("USER_NAME");
-        //questionid = getIntent().getIntExtra("QUESTION_ID", -1);
         questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
 
         // get results

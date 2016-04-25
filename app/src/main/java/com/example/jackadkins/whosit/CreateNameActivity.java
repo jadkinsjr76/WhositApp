@@ -104,8 +104,6 @@ public class CreateNameActivity extends AppCompatActivity {
         quizid = quiz.getQuizID();
 
         checkQuiz = db.getQuiz(quizid);
-        Toast.makeText(CreateNameActivity.this, checkQuiz.getName(), Toast.LENGTH_SHORT).show();
-
     }
 
     private void launchCreateQuizAct(){
