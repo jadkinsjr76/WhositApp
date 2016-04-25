@@ -21,7 +21,6 @@ public class CreateResultsActivity extends AppCompatActivity {
     private String[] answersArray = new String[80];
     private String[] resultsArrayMap = new String[80];
     private String quizName = "";
-    private String[] questionArray = new String[20];
     private int mcurrentResult = 0;
     private EditText resultsEditText;
     private ButtonListener mButtonListener = new ButtonListener();
@@ -67,7 +66,6 @@ public class CreateResultsActivity extends AppCompatActivity {
         resultsEditText = (EditText) findViewById(R.id.enterResult);
 
         quizName = getIntent().getStringExtra("quizName");
-        questionArray = getIntent().getStringArrayExtra("questionArray");
         answersArray = getIntent().getStringArrayExtra("answerArray");
         resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
         resultsArray = getIntent().getStringArrayExtra("resultArray");
@@ -134,7 +132,6 @@ public class CreateResultsActivity extends AppCompatActivity {
         createQuizIntent.putExtra("answerArray", answersArray);
         createQuizIntent.putExtra("resultsMap", resultsArrayMap);
         createQuizIntent.putExtra("quizName", quizName);
-        createQuizIntent.putExtra("questionArray", questionArray);
         startActivity(createQuizIntent);
     }
 }

@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,17 +33,17 @@ public class CreateAnswersActivity extends AppCompatActivity {
     private int mcurrentQuestion = 0;
     private Spinner mSpinner;
     int spinnerPosition = 0;
-    private TextView enterAnswerTextView;
     private EditText enterAnswerEditText;
     private Button nextButton;
     private Button backButton;
     private Button doneButton;
-    private String quizName = "";
-    private String[] questionArray = new String[20];
+    private int questionid = -1;
+    private int answerid = -1;
     private String[] resultsArray = new String[8];
     private String[] resultsArrayMap = new String[80];
     private ButtonListener mButtonListener = new ButtonListener();
     private List<String> categories = new ArrayList<String>();
+    private WhosItDB db = new WhosItDB(this);
 
     class ButtonListener implements View.OnClickListener {
         @Override
@@ -95,15 +94,13 @@ public class CreateAnswersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_answers);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        enterAnswerTextView = (TextView) findViewById(R.id.enterAnswersTextView);
         enterAnswerEditText = (EditText) findViewById(R.id.a2);
         nextButton = (Button) findViewById(R.id.nextButtonAnswers);
         backButton = (Button) findViewById(R.id.backButtonAnswers);
         doneButton = (Button) findViewById(R.id.doneButtonAnswers);
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
-        quizName = getIntent().getStringExtra("quizName");
-        questionArray = getIntent().getStringArrayExtra("questionArray");
+        questionid = getIntent().getIntExtra("QUESTION_ID", -1);
         answersArray = getIntent().getStringArrayExtra("answerArray");
         resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
         resultsArray = getIntent().getStringArrayExtra("resultArray");
@@ -112,6 +109,13 @@ public class CreateAnswersActivity extends AppCompatActivity {
             answersArray = new String[80];
             for(int i = 0; i < answersArray.length; i++){
                 answersArray[i] = " ";
+            }
+        }
+
+        if(resultsArrayMap == null){
+            resultsArrayMap = new String[80];
+            for(int i = 0; i < resultsArrayMap.length; i++){
+                resultsArrayMap[i] = " ";
             }
         }
 
@@ -158,10 +162,17 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void enterAnswerResultPair(){
-        if(answersArray!= null && resultsArrayMap!= null){
+        if(answersArray!= null && resultsArrayMap != null){
             answersArray[mcurrentAnswer] = enterAnswerEditText.getText().toString();
             resultsArrayMap[mcurrentAnswer] = mSpinner.getSelectedItem().toString();
+            if(questionid != -1){
+                Answer answer = new Answer(answersArray[mcurrentAnswer], resultsArrayMap[mcurrentAnswer]);
+                answer.setQuestionID(questionid);
+                answer.setAnswerID((int)db.insertAnswer(answer));
+                answerid = answer.getAnswerID();
+            }
         }
+
 
     }
 
@@ -181,8 +192,6 @@ public class CreateAnswersActivity extends AppCompatActivity {
             for(int i = 0; i < resultsArray.length; i++){
                 categories.add(resultsArray[i]);
             }
-        }else{
-            Toast.makeText(CreateAnswersActivity.this, "Please go back and enter your Results first.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -190,8 +199,6 @@ public class CreateAnswersActivity extends AppCompatActivity {
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("answerArray", answersArray);
         createQuizIntent.putExtra("resultsMap", resultsArrayMap);
-        createQuizIntent.putExtra("quizName", quizName);
-        createQuizIntent.putExtra("questionArray", questionArray);
         createQuizIntent.putExtra("resultArray", resultsArray);
         startActivity(createQuizIntent);
     }

@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -119,13 +118,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
     private void enterQuestion(){
         myStringArray[currentQuestion] = questionEditText.getText().toString();
-        Toast.makeText(CreateQuestionActivity.this, "Triggered", Toast.LENGTH_SHORT).show();
         if(quizid != -1){
             Question question = new Question(myStringArray[currentQuestion]);
             question.setQuizID(quizid);
             question.setQuestionID((int)db.insertQuestion(question));
             questionID = question.getQuestionID();
-            Toast.makeText(CreateQuestionActivity.this, db.getQuestion(question.getQuestionID()).getQuestionText(), Toast.LENGTH_SHORT).show();
         }
     }
 

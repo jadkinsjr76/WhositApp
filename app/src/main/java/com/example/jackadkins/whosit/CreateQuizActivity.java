@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,6 +45,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Quiz newQuiz;
     private int userid = -1;
     private int quizid = -1;
+    private int questionid = -1;
     private String[] questionArray = new String[20];
     private String[] answerArray = new String[80];
     private String[] resultMap = new String[80];
@@ -75,6 +75,7 @@ public class CreateQuizActivity extends AppCompatActivity {
         //Get userID
         userid = getIntent().getIntExtra("USER_ID", -1);
         quizid = getIntent().getIntExtra("QUIZ_ID", -1);
+        questionid = getIntent().getIntExtra("QUESTION_ID", -1);
 
         // get results
         resultArray = getIntent().getStringArrayExtra("resultArray");
@@ -145,6 +146,9 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     private void launchAnswerActivity(){
         Intent createAnswerIntent = new Intent(this, CreateAnswersActivity.class);
+        if(questionid != -1){
+            createAnswerIntent.putExtra("QUESTION_ID", questionid);
+        }
         createAnswerIntent.putExtra("answerArray", answerArray);
         createAnswerIntent.putExtra("resultArray", resultArray);
         createAnswerIntent.putExtra("resultsMap", resultMap);

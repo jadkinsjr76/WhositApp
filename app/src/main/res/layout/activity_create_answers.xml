@@ -19,16 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/enterAnswersTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/enter_answers"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:paddingTop="100dp"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center"/>
 
             <EditText
                 android:id="@+id/a2"
