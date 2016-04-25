@@ -39,10 +39,10 @@ public class WhosItDB {
     public static final String QUIZ_ID = "_id";
     public static final int    QUIZ_ID_COL = 0;
 
-    public static final String QUIZ_USER_ID = "user_id";
+    public static final String QUIZ_USER_ID = "_user_id";
     public static final int    QUIZ_USER_ID_COL = 1;
 
-    public static final String QUIZ_NAME = "name";
+    public static final String QUIZ_NAME = "_name";
     public static final int    QUIZ_NAME_COL = 2;
 
     // Question Table Constants:
@@ -51,10 +51,10 @@ public class WhosItDB {
     public static final String QUESTION_ID = "_id";
     public static final int    QUESTION_ID_COL = 0;
 
-    public static final String QUESTION_QUIZ_ID = "quiz_id";
+    public static final String QUESTION_QUIZ_ID = "_quiz_id";
     public static final int    QUESTION_QUIZ_ID_COL = 1;
 
-    public static final String QUESTION_TEXT = "name";
+    public static final String QUESTION_TEXT = "_name";
     public static final int    QUESTION_TEXT_COL = 2;
 
     // Answer Table Constants:
@@ -63,13 +63,13 @@ public class WhosItDB {
     public static final String ANSWER_ID = "_id";
     public static final int    ANSWER_ID_COL = 0;
 
-    public static final String ANSWER_QUESTION_ID = "question_id";
+    public static final String ANSWER_QUESTION_ID = "_question_id";
     public static final int    ANSWER_QUESTION_ID_COL = 1;
 
-    public static final String ANSWER_TEXT = "text";
+    public static final String ANSWER_TEXT = "_text";
     public static final int    ANSWER_TEXT_COL = 2;
 
-    public static final String ANSWER_RESULT_TEXT = "result_text";
+    public static final String ANSWER_RESULT_TEXT = "_result_text";
     public static final int    ANSWER_RESULT_TEXT_COL = 3;
 
     // CREATE and DROP TABLE statements:
