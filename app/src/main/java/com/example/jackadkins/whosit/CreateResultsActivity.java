@@ -26,6 +26,8 @@ public class CreateResultsActivity extends AppCompatActivity {
     private String quizName = "";
     private int questionid = -1;
     private int mcurrentResult = 0;
+    private int userid = -1;
+    private String usernameString = "";
     private EditText resultsEditText;
     private ButtonListener mButtonListener = new ButtonListener();
 
@@ -69,6 +71,8 @@ public class CreateResultsActivity extends AppCompatActivity {
         doneButton = (Button) findViewById(R.id.doneButtonResults);
         resultsEditText = (EditText) findViewById(R.id.enterResult);
 
+        userid = getIntent().getIntExtra("USER_ID", -1);
+        usernameString = getIntent().getStringExtra("USER_NAME");
         questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
         questionid = getIntent().getIntExtra("QUESTION_ID", -1);
         quizName = getIntent().getStringExtra("quizName");
@@ -137,9 +141,11 @@ public class CreateResultsActivity extends AppCompatActivity {
         createQuizIntent.putExtra("resultArray", resultsArray);
         createQuizIntent.putExtra("answerArray", answersArray);
         createQuizIntent.putExtra("resultsMap", resultsArrayMap);
-        //createQuizIntent.putExtra("QUESTION_ID", questionid);
         createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
         createQuizIntent.putExtra("quizName", quizName);
+
+        createQuizIntent.putExtra("USER_NAME", usernameString);
+        createQuizIntent.putExtra("USER_ID", userid);
         startActivity(createQuizIntent);
     }
 }

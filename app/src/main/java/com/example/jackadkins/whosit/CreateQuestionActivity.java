@@ -66,7 +66,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private WhosItDB db = new WhosItDB(this);
 
     private int userid = -1;
-    private String usernameString;
+    private String usernameString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,15 +132,12 @@ public class CreateQuestionActivity extends AppCompatActivity {
             question.setQuestionID((int)db.insertQuestion(question));
             questionID = question.getQuestionID();
             questionIDArrayList.add(questionID);
-
-            //Toast.makeText(CreateQuestionActivity.this, "" + questionID, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("questionArray", myStringArray);
-        //createQuizIntent.putExtra("QUESTION_ID", questionID);
         createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
         createQuizIntent.putExtra("USER_NAME", usernameString);
         createQuizIntent.putExtra("USER_ID", userid);

@@ -34,7 +34,7 @@ public class CreateNameActivity extends AppCompatActivity {
     private String quizName;
 
     private int userid = -1;
-    private String usernameString;
+    private String usernameString = "";
 
     private int quizid = -1;
     private Quiz checkQuiz = new Quiz();

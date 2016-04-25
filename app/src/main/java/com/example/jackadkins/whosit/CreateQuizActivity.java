@@ -56,7 +56,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private ButtonListener mButtonListener = new ButtonListener();
 
     private int userid = -1;
-    private String usernameString;
+    private String usernameString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +145,6 @@ public class CreateQuizActivity extends AppCompatActivity {
     private void launchResultsActivity(){
         Intent createResultIntent = new Intent(this, CreateResultsActivity.class);
         createResultIntent.putExtra("QUESTION_IDS", questionIDArrayList);
-       // createResultIntent.putExtra("QUESTION_ID", questionid);
         createResultIntent.putExtra("resultArray", resultArray);
         createResultIntent.putExtra("quizName", quizName);
         createResultIntent.putExtra("questionArray", questionArray);
@@ -160,9 +159,6 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     private void launchAnswerActivity(){
         Intent createAnswerIntent = new Intent(this, CreateAnswersActivity.class);
-        /*if(questionid != -1){
-            createAnswerIntent.putExtra("QUESTION_ID", questionid);
-        }*/
         if(questionIDArrayList != null){
             createAnswerIntent.putExtra("QUESTION_IDS", questionIDArrayList);
         }

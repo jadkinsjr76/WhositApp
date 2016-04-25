@@ -20,7 +20,7 @@
 
     <!-- Strings related to createQuizActivity -->
     <string name="done_button">Done</string>
-    <string name="next_button">Next</string>
+    <string name="next_button">Insert</string>
     <string name="back_button">Back</string>
     <string name="finish_button">Finish</string>
     <string name="enter_quiz_name">Enter a Quiz Name!</string>

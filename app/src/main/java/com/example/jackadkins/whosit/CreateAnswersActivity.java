@@ -52,7 +52,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
     private WhosItDB db = new WhosItDB(this);
 
     private int userid = -1;
-    private String usernameString;
+    private String usernameString = "";
 
     class ButtonListener implements View.OnClickListener {
         @Override
@@ -149,7 +149,6 @@ public class CreateAnswersActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                   // enterAnswerResultPair();
                 }
                 return false;
 
@@ -163,8 +162,6 @@ public class CreateAnswersActivity extends AppCompatActivity {
                     case KeyEvent.KEYCODE_ENTER:
                     case KeyEvent.KEYCODE_DPAD_CENTER:
 
-                       // enterAnswerResultPair();
-
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(enterAnswerEditText.getWindowToken(), 0);
                         return true;
@@ -177,9 +174,6 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void enterAnswerResultPair(){
-        //mcurrentQuestion2 = 2
-        //maxQuestion = 3
-        //count = 4
         if(mcurrentQuestion2 < maxQuestions){
             if(answersArray!= null && resultsArrayMap != null){
                 answersArray[mcurrentAnswer] = enterAnswerEditText.getText().toString();
@@ -190,7 +184,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
                     answer.setQuestionID(questionIDArrayList.get(mcurrentQuestion2));
                     answer.setAnswerID((int)db.insertAnswer(answer));
                     answerid = answer.getAnswerID();
-                    if(count == 4){
+                    if(count == 3){
                         mcurrentQuestion2++;
                         count = 0;
                     }else{
