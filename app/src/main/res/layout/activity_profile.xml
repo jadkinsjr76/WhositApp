@@ -19,28 +19,31 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            android:weightSum="4">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:id="@+id/coverPhoto_profile_imageView"
                 android:background="#9873ce"
-                android:layout_weight="1" />
+                android:layout_weight="0"
+                android:src="@drawable/forest"
+                android:scaleType="centerCrop" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="4">
+            android:weightSum="2">
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:id="@+id/imageView"
-                android:background="#e73b3b"
-                android:layout_column="1"
-                android:src="@drawable/default_profile_pic" />
+                android:background="#FFFFFF"
+                android:layout_column="0"
+                android:src="@drawable/default_profile_pic"
+                android:layout_weight="4.25" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,10 +51,11 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="&lt;username>"
                 android:id="@+id/username_profile_textView"
-                android:layout_column="2"
+                android:layout_column="1"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0" />
 
         </TableRow>
 
