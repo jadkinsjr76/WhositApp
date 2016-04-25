@@ -51,6 +51,9 @@ public class CreateAnswersActivity extends AppCompatActivity {
     private ArrayList<Integer> questionIDArrayList = new ArrayList<>();
     private WhosItDB db = new WhosItDB(this);
 
+    private int userid = -1;
+    private String usernameString;
+
     class ButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View v){
@@ -109,6 +112,10 @@ public class CreateAnswersActivity extends AppCompatActivity {
         questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
         maxQuestions = questionIDArrayList.size();
        // questionid = getIntent().getIntExtra("QUESTION_ID", -1);
+
+        userid = getIntent().getIntExtra("USER_ID", -1);
+        usernameString = getIntent().getStringExtra("USER_NAME");
+
         answersArray = getIntent().getStringArrayExtra("answerArray");
         resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
         resultsArray = getIntent().getStringArrayExtra("resultArray");
@@ -214,6 +221,10 @@ public class CreateAnswersActivity extends AppCompatActivity {
             createQuizIntent.putExtra("answerArray", answersArray);
             createQuizIntent.putExtra("resultsMap", resultsArrayMap);
             createQuizIntent.putExtra("resultArray", resultsArray);
+
+            createQuizIntent.putExtra("USER_NAME", usernameString);
+            createQuizIntent.putExtra("USER_ID", userid);
+
             startActivity(createQuizIntent);
         }
 

@@ -44,7 +44,6 @@ public class CreateQuizActivity extends AppCompatActivity {
     private Button enterAnswerButton;
     private Button finishButton;
     private Quiz newQuiz;
-    private int userid = -1;
     private int quizid = -1;
     private int questionid = -1;
     private ArrayList<Integer> questionIDArrayList = new ArrayList<>();
@@ -54,8 +53,10 @@ public class CreateQuizActivity extends AppCompatActivity {
     private String[] resultArray = new String[8];
     private ArrayList<String> questionArrayList = new ArrayList<>();
     private String quizName = "";
-    private String usernameString;
     private ButtonListener mButtonListener = new ButtonListener();
+
+    private int userid = -1;
+    private String usernameString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +117,7 @@ public class CreateQuizActivity extends AppCompatActivity {
             createNameIntent.putExtra("USER_ID", userid);
         }
 
+        createNameIntent.putExtra("USER_NAME", usernameString);
 
         createNameIntent.putExtra("questionArray", questionArray);
         createNameIntent.putExtra("answerArray", answerArray);
@@ -129,6 +131,9 @@ public class CreateQuizActivity extends AppCompatActivity {
         if(quizid != -1){
             createQuestionIntent.putExtra("QUIZ_ID", quizid);
         }
+
+        createQuestionIntent.putExtra("USER_NAME", usernameString);
+        createQuestionIntent.putExtra("USER_ID", userid);
 
         createQuestionIntent.putExtra("quizName", quizName);
         createQuestionIntent.putExtra("questionArray", questionArray);
@@ -147,6 +152,10 @@ public class CreateQuizActivity extends AppCompatActivity {
         createResultIntent.putExtra("questionArray", questionArray);
         createResultIntent.putExtra("answerArray", answerArray);
         createResultIntent.putExtra("resultsMap", resultMap);
+
+        createResultIntent.putExtra("USER_NAME", usernameString);
+        createResultIntent.putExtra("USER_ID", userid);
+
         startActivity(createResultIntent);
     }
 
@@ -158,6 +167,10 @@ public class CreateQuizActivity extends AppCompatActivity {
         if(questionIDArrayList != null){
             createAnswerIntent.putExtra("QUESTION_IDS", questionIDArrayList);
         }
+
+        createAnswerIntent.putExtra("USER_NAME", usernameString);
+        createAnswerIntent.putExtra("USER_ID", userid);
+
         createAnswerIntent.putExtra("answerArray", answerArray);
         createAnswerIntent.putExtra("resultArray", resultArray);
         createAnswerIntent.putExtra("resultsMap", resultMap);

@@ -65,6 +65,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private ButtonListener mButtonListener = new ButtonListener();
     private WhosItDB db = new WhosItDB(this);
 
+    private int userid = -1;
+    private String usernameString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         questionArray = getIntent().getStringArrayExtra("questionArray");
 
         quizid = getIntent().getIntExtra("QUIZ_ID", -1);
+        userid = getIntent().getIntExtra("USER_ID", -1);
+        usernameString = getIntent().getStringExtra("USER_NAME");
 
         if(questionArray != null){
             myStringArray = questionArray;
@@ -138,7 +142,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         createQuizIntent.putExtra("questionArray", myStringArray);
         //createQuizIntent.putExtra("QUESTION_ID", questionID);
         createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
-
+        createQuizIntent.putExtra("USER_NAME", usernameString);
+        createQuizIntent.putExtra("USER_ID", userid);
         startActivity(createQuizIntent);
     }
 }

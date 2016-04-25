@@ -25,10 +25,11 @@
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="@string/enter_answer"
                 android:textStyle="bold"
                 android:paddingTop="80dp"
-                android:maxLength="50"/>
+                android:maxLength="50"
+                android:hint="@string/enter_answer"
+                android:singleLine="true" />
 
             <Spinner
                 android:layout_width="fill_parent"

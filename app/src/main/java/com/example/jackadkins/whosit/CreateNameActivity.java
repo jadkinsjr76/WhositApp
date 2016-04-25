@@ -32,7 +32,10 @@ public class CreateNameActivity extends AppCompatActivity {
     private EditText enterQuizNameEditText;
     private Button qnDoneButton;
     private String quizName;
+
     private int userid = -1;
+    private String usernameString;
+
     private int quizid = -1;
     private Quiz checkQuiz = new Quiz();
     private String[] answersArray = new String[80];
@@ -53,6 +56,7 @@ public class CreateNameActivity extends AppCompatActivity {
 
 
         userid = getIntent().getIntExtra("USER_ID", -1);
+        usernameString = getIntent().getStringExtra("USER_NAME");
         quizName = getIntent().getStringExtra("quizName");
         if(quizName == null){
            quizName = "Default Quiz Name.";
@@ -112,6 +116,10 @@ public class CreateNameActivity extends AppCompatActivity {
         createQuizIntent.putExtra("questionArray", questionArray);
         createQuizIntent.putExtra("resultArray", resultsArray);
         createQuizIntent.putExtra("QUIZ_ID",quizid);
+
+        createQuizIntent.putExtra("USER_NAME", usernameString);
+        createQuizIntent.putExtra("USER_ID", userid);
+
         startActivity(createQuizIntent);
     }
 

@@ -52,7 +52,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:singleLine="true" />
 
         </TableRow>
 
@@ -83,7 +84,8 @@
                 android:layout_alignLeft="@+id/rUsernameEditText"
                 android:layout_alignStart="@+id/rUsernameEditText"
                 android:text="@string/rPasswordEditText"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:singleLine="true" />
         </TableRow>
 
         <TableRow
@@ -113,7 +115,8 @@
                 android:layout_alignLeft="@+id/rPasswordEditText"
                 android:layout_alignStart="@+id/rPasswordEditText"
                 android:text="@string/rConfirmPasswordEditText"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:singleLine="true" />
         </TableRow>
 
         <TableRow
