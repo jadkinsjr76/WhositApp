@@ -149,7 +149,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                    enterAnswerResultPair();
+                   // enterAnswerResultPair();
                 }
                 return false;
 
@@ -163,7 +163,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
                     case KeyEvent.KEYCODE_ENTER:
                     case KeyEvent.KEYCODE_DPAD_CENTER:
 
-                        enterAnswerResultPair();
+                       // enterAnswerResultPair();
 
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(enterAnswerEditText.getWindowToken(), 0);
