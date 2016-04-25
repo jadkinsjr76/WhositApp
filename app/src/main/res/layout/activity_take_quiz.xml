@@ -34,7 +34,8 @@
             android:text="New RadioButton"
             android:id="@+id/answer_radio1"
             android:layout_weight="0.08"
-            android:minHeight="25dp"/>
+            android:minHeight="25dp"
+            android:checked="false"/>
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -42,7 +43,8 @@
             android:text="New RadioButton"
             android:id="@+id/answer_radio2"
             android:layout_weight="0.04"
-            android:minHeight="25dp"/>
+            android:minHeight="25dp"
+            android:checked="false"/>
 
         <RadioButton
             android:layout_width="wrap_content"

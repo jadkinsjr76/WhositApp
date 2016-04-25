@@ -8,6 +8,8 @@ public class Quiz
     private int userID;
     private String name;
     private ArrayList<Question> questions = new ArrayList<Question>();
+    private ArrayList<String> results = new ArrayList<>();
+    private ArrayList<Integer> keys = new ArrayList<>();
 
     public Quiz()
     {
@@ -98,11 +100,23 @@ public class Quiz
 
     public void setAllQuestions(ArrayList<Question> q)
     {
-       questions = q;
+       questions = (ArrayList<Question>)q.clone();;
     }
 
     public int getNumQuestions()
     {
         return questions.size();
+    }
+
+
+    public boolean doesResultExist(String res)
+    {
+        return results.contains(res);
+    }
+
+    public void insertResult(String result)
+    {
+        results.add(result);
+        keys.add(0);
     }
 }
