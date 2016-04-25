@@ -36,6 +36,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
     private int maxQuestions;
     private Spinner mSpinner;
     int spinnerPosition = 0;
+    private TextView errorAnswer;
     private EditText enterAnswerEditText;
     private Button nextButton;
     private Button backButton;
@@ -100,6 +101,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         enterAnswerEditText = (EditText) findViewById(R.id.a2);
+        errorAnswer = (TextView) findViewById(R.id.errorEnterAnswer);
         nextButton = (Button) findViewById(R.id.nextButtonAnswers);
         backButton = (Button) findViewById(R.id.backButtonAnswers);
         doneButton = (Button) findViewById(R.id.doneButtonAnswers);
@@ -176,8 +178,6 @@ public class CreateAnswersActivity extends AppCompatActivity {
                     mcurrentQuestion2++;
                     count = 0;
                 }
-                Toast.makeText(CreateAnswersActivity.this, "WE MADE IT", Toast.LENGTH_SHORT).show();
-                Toast.makeText(CreateAnswersActivity.this, "" + questionIDArrayList.get(mcurrentQuestion2), Toast.LENGTH_SHORT).show();
                 Answer answer = new Answer(answersArray[mcurrentAnswer], resultsArrayMap[mcurrentAnswer]);
                 answer.setQuestionID(questionIDArrayList.get(mcurrentQuestion2));
                 answer.setAnswerID((int)db.insertAnswer(answer));
@@ -189,12 +189,9 @@ public class CreateAnswersActivity extends AppCompatActivity {
 
     }
 
-
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
         //handle spinner code here
-
     }
-
 
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
@@ -209,12 +206,17 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void launchActivity(){
-        Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
-        createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
-        createQuizIntent.putExtra("answerArray", answersArray);
-        createQuizIntent.putExtra("resultsMap", resultsArrayMap);
-        createQuizIntent.putExtra("resultArray", resultsArray);
-        startActivity(createQuizIntent);
+        if(mcurrentQuestion2 < maxQuestions){
+            errorAnswer.setVisibility(View.VISIBLE);
+        }else{
+            Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
+            createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
+            createQuizIntent.putExtra("answerArray", answersArray);
+            createQuizIntent.putExtra("resultsMap", resultsArrayMap);
+            createQuizIntent.putExtra("resultArray", resultsArray);
+            startActivity(createQuizIntent);
+        }
+
     }
 
 }
