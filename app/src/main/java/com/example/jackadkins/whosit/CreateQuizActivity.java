@@ -54,6 +54,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private String[] resultArray = new String[8];
     private ArrayList<String> questionArrayList = new ArrayList<>();
     private String quizName = "";
+    private String usernameString;
     private ButtonListener mButtonListener = new ButtonListener();
 
     @Override
@@ -77,6 +78,7 @@ public class CreateQuizActivity extends AppCompatActivity {
         //Get userID
         userid = getIntent().getIntExtra("USER_ID", -1);
         quizid = getIntent().getIntExtra("QUIZ_ID", -1);
+        usernameString = getIntent().getStringExtra("USER_NAME");
         //questionid = getIntent().getIntExtra("QUESTION_ID", -1);
         questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
 
@@ -166,6 +168,8 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     private void launchProfileActivity(){
         Intent profileIntent = new Intent(this, ProfileActivity.class);
+        profileIntent.putExtra("USER_NAME", usernameString);
+        profileIntent.putExtra("USER_ID", userid);
         startActivity(profileIntent);
     }
 }
