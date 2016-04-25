@@ -111,7 +111,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
         mSpinner = (Spinner) findViewById(R.id.spinner);
         questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
         maxQuestions = questionIDArrayList.size();
-       // questionid = getIntent().getIntExtra("QUESTION_ID", -1);
+        // questionid = getIntent().getIntExtra("QUESTION_ID", -1);
 
         userid = getIntent().getIntExtra("USER_ID", -1);
         usernameString = getIntent().getStringExtra("USER_NAME");
@@ -177,21 +177,33 @@ public class CreateAnswersActivity extends AppCompatActivity {
     }
 
     private void enterAnswerResultPair(){
-        if(answersArray!= null && resultsArrayMap != null){
-            answersArray[mcurrentAnswer] = enterAnswerEditText.getText().toString();
-            resultsArrayMap[mcurrentAnswer] = mSpinner.getSelectedItem().toString();
-            if(questionIDArrayList.get(mcurrentQuestion2) != -1){
-                if(count == 4){
-                    mcurrentQuestion2++;
-                    count = 0;
+        //mcurrentQuestion2 = 2
+        //maxQuestion = 3
+        //count = 4
+        if(mcurrentQuestion2 < maxQuestions){
+            if(answersArray!= null && resultsArrayMap != null){
+                answersArray[mcurrentAnswer] = enterAnswerEditText.getText().toString();
+                resultsArrayMap[mcurrentAnswer] = mSpinner.getSelectedItem().toString();
+                if(questionIDArrayList.get(mcurrentQuestion2) != -1){
+
+                    Answer answer = new Answer(answersArray[mcurrentAnswer], resultsArrayMap[mcurrentAnswer]);
+                    answer.setQuestionID(questionIDArrayList.get(mcurrentQuestion2));
+                    answer.setAnswerID((int)db.insertAnswer(answer));
+                    answerid = answer.getAnswerID();
+                    if(count == 4){
+                        mcurrentQuestion2++;
+                        count = 0;
+                    }else{
+                        count++;
+                    }
+
                 }
-                Answer answer = new Answer(answersArray[mcurrentAnswer], resultsArrayMap[mcurrentAnswer]);
-                answer.setQuestionID(questionIDArrayList.get(mcurrentQuestion2));
-                answer.setAnswerID((int)db.insertAnswer(answer));
-                answerid = answer.getAnswerID();
-                count++;
             }
+        }else{
+            errorAnswer.setText("Too many answers.");
+            errorAnswer.setVisibility(View.VISIBLE);
         }
+
 
 
     }
