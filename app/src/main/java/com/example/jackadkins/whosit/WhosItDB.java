@@ -521,6 +521,7 @@ public class WhosItDB {
     public long insertAnswer(Answer answer) {
         ContentValues cv = new ContentValues();
         cv.put(ANSWER_TEXT, answer.getAnswerName());
+        cv.put(ANSWER_RESULT_TEXT, answer.getResult());
         cv.put(ANSWER_QUESTION_ID, answer.getQuestionID());
 
         this.openWriteableDB();

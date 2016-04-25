@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private int userid = -1;
     private int quizid = -1;
     private int questionid = -1;
+    private ArrayList<Integer> questionIDArrayList = new ArrayList<>();
     private String[] questionArray = new String[20];
     private String[] answerArray = new String[80];
     private String[] resultMap = new String[80];
@@ -75,7 +77,8 @@ public class CreateQuizActivity extends AppCompatActivity {
         //Get userID
         userid = getIntent().getIntExtra("USER_ID", -1);
         quizid = getIntent().getIntExtra("QUIZ_ID", -1);
-        questionid = getIntent().getIntExtra("QUESTION_ID", -1);
+        //questionid = getIntent().getIntExtra("QUESTION_ID", -1);
+        questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
 
         // get results
         resultArray = getIntent().getStringArrayExtra("resultArray");
@@ -125,7 +128,6 @@ public class CreateQuizActivity extends AppCompatActivity {
             createQuestionIntent.putExtra("QUIZ_ID", quizid);
         }
 
-
         createQuestionIntent.putExtra("quizName", quizName);
         createQuestionIntent.putExtra("questionArray", questionArray);
         createQuestionIntent.putExtra("answerArray", answerArray);
@@ -136,6 +138,8 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     private void launchResultsActivity(){
         Intent createResultIntent = new Intent(this, CreateResultsActivity.class);
+        createResultIntent.putExtra("QUESTION_IDS", questionIDArrayList);
+       // createResultIntent.putExtra("QUESTION_ID", questionid);
         createResultIntent.putExtra("resultArray", resultArray);
         createResultIntent.putExtra("quizName", quizName);
         createResultIntent.putExtra("questionArray", questionArray);
@@ -146,8 +150,11 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     private void launchAnswerActivity(){
         Intent createAnswerIntent = new Intent(this, CreateAnswersActivity.class);
-        if(questionid != -1){
+        /*if(questionid != -1){
             createAnswerIntent.putExtra("QUESTION_ID", questionid);
+        }*/
+        if(questionIDArrayList != null){
+            createAnswerIntent.putExtra("QUESTION_IDS", questionIDArrayList);
         }
         createAnswerIntent.putExtra("answerArray", answerArray);
         createAnswerIntent.putExtra("resultArray", resultArray);
@@ -160,9 +167,5 @@ public class CreateQuizActivity extends AppCompatActivity {
     private void launchProfileActivity(){
         Intent profileIntent = new Intent(this, ProfileActivity.class);
         startActivity(profileIntent);
-    }
-
-    private void enterIntoDB(){
-
     }
 }

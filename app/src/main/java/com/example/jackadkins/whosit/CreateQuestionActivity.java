@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -54,6 +57,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private int quizid = -1;
     private int questionID = -1;
     private int currentQuestion = 0;
+    private ArrayList<Integer> questionIDArrayList = new ArrayList<>();
     private EditText questionEditText;
     private Button nextButton;
     private Button backButton;
@@ -123,13 +127,17 @@ public class CreateQuestionActivity extends AppCompatActivity {
             question.setQuizID(quizid);
             question.setQuestionID((int)db.insertQuestion(question));
             questionID = question.getQuestionID();
+            questionIDArrayList.add(questionID);
+
+            //Toast.makeText(CreateQuestionActivity.this, "" + questionID, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void launchCreateQuizAct(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
         createQuizIntent.putExtra("questionArray", myStringArray);
-        createQuizIntent.putExtra("QUESTION_ID", questionID);
+        //createQuizIntent.putExtra("QUESTION_ID", questionID);
+        createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
 
         startActivity(createQuizIntent);
     }

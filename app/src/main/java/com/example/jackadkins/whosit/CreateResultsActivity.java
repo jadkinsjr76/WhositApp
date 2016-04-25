@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CreateResultsActivity extends AppCompatActivity {
 
     private Button nextButton;
@@ -20,7 +22,9 @@ public class CreateResultsActivity extends AppCompatActivity {
     private String[] resultsArray = new String[8];
     private String[] answersArray = new String[80];
     private String[] resultsArrayMap = new String[80];
+    private ArrayList<Integer> questionIDArrayList;
     private String quizName = "";
+    private int questionid = -1;
     private int mcurrentResult = 0;
     private EditText resultsEditText;
     private ButtonListener mButtonListener = new ButtonListener();
@@ -65,6 +69,8 @@ public class CreateResultsActivity extends AppCompatActivity {
         doneButton = (Button) findViewById(R.id.doneButtonResults);
         resultsEditText = (EditText) findViewById(R.id.enterResult);
 
+        questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
+        questionid = getIntent().getIntExtra("QUESTION_ID", -1);
         quizName = getIntent().getStringExtra("quizName");
         answersArray = getIntent().getStringArrayExtra("answerArray");
         resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
@@ -131,6 +137,8 @@ public class CreateResultsActivity extends AppCompatActivity {
         createQuizIntent.putExtra("resultArray", resultsArray);
         createQuizIntent.putExtra("answerArray", answersArray);
         createQuizIntent.putExtra("resultsMap", resultsArrayMap);
+        //createQuizIntent.putExtra("QUESTION_ID", questionid);
+        createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
         createQuizIntent.putExtra("quizName", quizName);
         startActivity(createQuizIntent);
     }

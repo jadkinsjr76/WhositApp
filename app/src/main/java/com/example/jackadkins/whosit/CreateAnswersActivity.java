@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +32,14 @@ public class CreateAnswersActivity extends AppCompatActivity {
     private String[] answersArray = new String[80];
     private int mcurrentAnswer = 0;
     private int mcurrentQuestion = 0;
+    private int mcurrentQuestion2 = 0;
+    private int maxQuestions;
     private Spinner mSpinner;
     int spinnerPosition = 0;
     private EditText enterAnswerEditText;
     private Button nextButton;
     private Button backButton;
+    private int count;
     private Button doneButton;
     private int questionid = -1;
     private int answerid = -1;
@@ -43,6 +47,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
     private String[] resultsArrayMap = new String[80];
     private ButtonListener mButtonListener = new ButtonListener();
     private List<String> categories = new ArrayList<String>();
+    private ArrayList<Integer> questionIDArrayList = new ArrayList<>();
     private WhosItDB db = new WhosItDB(this);
 
     class ButtonListener implements View.OnClickListener {
@@ -99,8 +104,9 @@ public class CreateAnswersActivity extends AppCompatActivity {
         backButton = (Button) findViewById(R.id.backButtonAnswers);
         doneButton = (Button) findViewById(R.id.doneButtonAnswers);
         mSpinner = (Spinner) findViewById(R.id.spinner);
-
-        questionid = getIntent().getIntExtra("QUESTION_ID", -1);
+        questionIDArrayList = getIntent().getIntegerArrayListExtra("QUESTION_IDS");
+        maxQuestions = questionIDArrayList.size();
+       // questionid = getIntent().getIntExtra("QUESTION_ID", -1);
         answersArray = getIntent().getStringArrayExtra("answerArray");
         resultsArrayMap = getIntent().getStringArrayExtra("resultsMap");
         resultsArray = getIntent().getStringArrayExtra("resultArray");
@@ -165,11 +171,18 @@ public class CreateAnswersActivity extends AppCompatActivity {
         if(answersArray!= null && resultsArrayMap != null){
             answersArray[mcurrentAnswer] = enterAnswerEditText.getText().toString();
             resultsArrayMap[mcurrentAnswer] = mSpinner.getSelectedItem().toString();
-            if(questionid != -1){
+            if(questionIDArrayList.get(mcurrentQuestion2) != -1){
+                if(count == 4){
+                    mcurrentQuestion2++;
+                    count = 0;
+                }
+                Toast.makeText(CreateAnswersActivity.this, "WE MADE IT", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateAnswersActivity.this, "" + questionIDArrayList.get(mcurrentQuestion2), Toast.LENGTH_SHORT).show();
                 Answer answer = new Answer(answersArray[mcurrentAnswer], resultsArrayMap[mcurrentAnswer]);
-                answer.setQuestionID(questionid);
+                answer.setQuestionID(questionIDArrayList.get(mcurrentQuestion2));
                 answer.setAnswerID((int)db.insertAnswer(answer));
                 answerid = answer.getAnswerID();
+                count++;
             }
         }
 
@@ -197,6 +210,7 @@ public class CreateAnswersActivity extends AppCompatActivity {
 
     private void launchActivity(){
         Intent createQuizIntent = new Intent(this, CreateQuizActivity.class);
+        createQuizIntent.putIntegerArrayListExtra("QUESTION_IDS", questionIDArrayList);
         createQuizIntent.putExtra("answerArray", answersArray);
         createQuizIntent.putExtra("resultsMap", resultsArrayMap);
         createQuizIntent.putExtra("resultArray", resultsArray);
