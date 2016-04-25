@@ -46,7 +46,6 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/usernameEditText"
-                android:text="@string/usernameEditText"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -82,7 +81,6 @@
                 android:layout_alignLeft="@+id/usernameEditText"
                 android:layout_alignStart="@+id/usernameEditText"
                 android:password="false"
-                android:text="@string/passwordEditText"
                 android:layout_weight="1"
                 android:textSize="16sp" />
         </TableRow>
