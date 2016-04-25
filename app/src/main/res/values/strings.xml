@@ -47,7 +47,7 @@
     <string name="rRegisterButton">Register</string>
     <string name="rUsernameTextView">Username:</string>
     <string name="rPasswordTextView">Password:</string>
-    <string name="rConfirmPasswordTextView">Confirm:</string>
+    <string name="rConfirmPasswordTextView">Confirm Password:</string>
     <string name="incorrectTextView">Username or password incorrect</string>
     <string name="action_addQuiz">Add Quiz</string>
     <string name="action_logout">Logout</string>

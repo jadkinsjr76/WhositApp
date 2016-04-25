@@ -9,79 +9,128 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jackadkins.whosit.RegisterActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/rUsernameEditText"
-        android:ems="10"
-        android:id="@+id/rUsernameEditText"
-        android:layout_marginTop="59dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
-    <EditText
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/rPasswordEditText"
-        android:layout_below="@+id/rUsernameEditText"
-        android:layout_alignLeft="@+id/rUsernameEditText"
-        android:layout_alignStart="@+id/rUsernameEditText"
-        android:layout_marginTop="31dp"
-        android:text="@string/rPasswordEditText" />
+        android:layout_height="200dp"
+        android:id="@+id/rlogin_logo_imageView"
+        android:focusable="false"
+        android:src="@drawable/whosit_mascot"
+        android:layout_weight="2"
+        android:layout_marginTop="25dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/rConfirmPasswordEditText"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/rPasswordEditText"
-        android:layout_alignStart="@+id/rPasswordEditText"
-        android:text="@string/rConfirmPasswordEditText" />
+        android:layout_below="@+id/rlogin_logo_imageView"
+        android:id="@+id/register_TableLayout">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rRegisterButton"
-        android:id="@+id/rRegisterButton"
-        android:layout_below="@+id/rConfirmPasswordEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/rUsernameTextView"
-        android:id="@+id/rUsernameTextView"
-        android:layout_alignTop="@+id/rUsernameEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/rUsernameTextView"
+                android:id="@+id/rUsernameTextView"
+                android:layout_alignTop="@+id/rUsernameEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/rPasswordTextView"
-        android:id="@+id/rPasswordTextView"
-        android:layout_alignTop="@+id/rPasswordEditText"
-        android:layout_alignLeft="@+id/rUsernameTextView"
-        android:layout_alignStart="@+id/rUsernameTextView" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="@string/rUsernameEditText"
+                android:ems="10"
+                android:id="@+id/rUsernameEditText"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/rConfirmPasswordTextView"
-        android:id="@+id/rConfirmPasswordTextView"
-        android:layout_alignTop="@+id/rConfirmPasswordEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/rPasswordTextView"
+                android:id="@+id/rPasswordTextView"
+                android:layout_alignTop="@+id/rPasswordEditText"
+                android:layout_alignLeft="@+id/rUsernameTextView"
+                android:layout_alignStart="@+id/rUsernameTextView"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/rPasswordEditText"
+                android:layout_below="@+id/rUsernameEditText"
+                android:layout_alignLeft="@+id/rUsernameEditText"
+                android:layout_alignStart="@+id/rUsernameEditText"
+                android:text="@string/rPasswordEditText"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/rConfirmPasswordTextView"
+                android:id="@+id/rConfirmPasswordTextView"
+                android:layout_alignTop="@+id/rConfirmPasswordEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/rConfirmPasswordEditText"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/rPasswordEditText"
+                android:layout_alignStart="@+id/rPasswordEditText"
+                android:text="@string/rConfirmPasswordEditText"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rRegisterButton"
+                android:id="@+id/rRegisterButton"
+                android:layout_below="@+id/rConfirmPasswordEditText"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="2" />
+        </TableRow>
+    </TableLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,6 +140,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#fe0303"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_below="@+id/register_TableLayout" />
 
 </RelativeLayout>
