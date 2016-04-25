@@ -1,5 +1,7 @@
 package com.example.jackadkins.whosit;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Quiz
@@ -136,21 +138,29 @@ public class Quiz
     public void incrementKey(int key)
     {
         int temp = keys.get(key);
-        keys.set(key, temp++);
+        temp++;
+        keys.set(key, temp);
     }
 
     public String findMaxResult()
     {
-        int max = 0;
+        for(int j = 0; j < results.size(); j++)
+        {
+            Log.d("tag", "\n" + results.get(j));
+            Log.d("tag", "\n" + keys.get(j));
+        }
+        int max = -1;
+        int index = 0;
 
         for(int j = 0; j < keys.size(); j++)
         {
             if(keys.get(j) > max)
             {
                 max = keys.get(j);
+                index = j;
             }
         }
 
-        return results.get(max);
+        return results.get(index);
     }
 }

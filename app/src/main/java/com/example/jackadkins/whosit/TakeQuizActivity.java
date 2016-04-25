@@ -96,12 +96,12 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    public void displayQuestion()//int questionNumber)
+    public void displayQuestion()
     {
         questionText.setText(quiz.getQuestion(currentQuestion).getQuestionText());
     }
 
-    public void displayAnswers()//int questionNumber)
+    public void displayAnswers()
     {
         rbAnswer1.setChecked(true);
         rbAnswer1.setText(quiz.getQuestion(currentQuestion).getAnswer(0).getAnswerName());
@@ -114,11 +114,6 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
     {
         displayQuestion();
         displayAnswers();
-    }
-
-    public void displayResults()
-    {
-
     }
 
     @Override
@@ -150,12 +145,13 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
             result = quiz.getQuestion(currentQuestion).getAnswer(3).getResult();
         }
 
-        if(result != "")
+      //  if(!result.equals(""))
         {
             // look through ArrayList until we get a match
             int key = quiz.searchResult(result);
             if(key != -1)
             {
+                Log.d("Tag", "Key = " + key);
                 quiz.incrementKey(key);
             }
         }
