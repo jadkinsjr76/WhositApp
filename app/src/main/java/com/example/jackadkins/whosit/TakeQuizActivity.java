@@ -14,6 +14,7 @@ public class TakeQuizActivity extends AppCompatActivity
 {
     private Quiz quiz = null;
     private TextView questionText;
+    private WhosItDB db = new WhosItDB(this);
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,7 +40,7 @@ public class TakeQuizActivity extends AppCompatActivity
     {
 
         // create db object
-        WhosItDB db = new WhosItDB(this);
+        //WhosItDB db = new WhosItDB(this);
 
         // go off to db and get quiz and questions
         quiz = db.getQuiz(quizId);
@@ -50,6 +51,10 @@ public class TakeQuizActivity extends AppCompatActivity
             questionText.setText("2");
         if(qu.size() == 3)
             questionText.setText("3");
+        if(qu.size() == 4)
+            questionText.setText("4");
+        if(qu.size() == 5)
+            questionText.setText("5");
        // quiz.setAllQuestions(db.getQuestions(quizId));
 
         // loop through each question
