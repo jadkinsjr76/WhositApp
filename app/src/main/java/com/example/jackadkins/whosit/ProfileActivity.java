@@ -57,8 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         // Initialize the user's values using intents:
-        userID = intent.getIntExtra("userId", 0);
-        usernameString = intent.getStringExtra("username");
+        userID = intent.getIntExtra("USER_ID", 0);
+        usernameString = intent.getStringExtra("USER_NAME");
 
         // Start up the database:
         db = new WhosItDB(this);
@@ -94,11 +94,8 @@ public class ProfileActivity extends AppCompatActivity {
                 // Put extra data and then start activity:
                 Intent intent = new Intent(getApplicationContext(), TakeQuizActivity.class);
                 intent.putExtra("QUIZ_ID", quizIDs.get(position));
-
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e) {}
-
+                intent.putExtra("USER_ID", userID);
+                intent.putExtra("USER_NAME", usernameString);
                 startActivity(intent);
             }
         });

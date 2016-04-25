@@ -52,4 +52,5 @@
     <string name="action_addQuiz">Add Quiz</string>
     <string name="action_logout">Logout</string>
     <string name="rErrorTextView">This username is taken</string>
+    <string name="action_backToProfile">Back to Profile.</string>
 </resources>

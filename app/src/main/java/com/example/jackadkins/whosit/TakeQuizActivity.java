@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -27,6 +29,10 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
     private Button nextBtn;
     private int currentQuestion = 0;
 
+    private int    userID;
+    private int    quizId;
+    private String usernameString;
+
     private WhosItDB db = new WhosItDB(this);
 
 
@@ -36,7 +42,7 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         // create button
         questionText = (TextView) findViewById(R.id.quiz_question_textView);
@@ -50,7 +56,9 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
         nextBtn.setOnClickListener(this);
 
         Intent intent = getIntent();
-        int quizId = intent.getIntExtra("QUIZ_ID", -1);
+        quizId = intent.getIntExtra("QUIZ_ID", -1);
+        userID = intent.getIntExtra("USER_ID", -1);
+        usernameString = intent.getStringExtra("USER_NAME");
 
         if(quizId >= 0)
         {
@@ -171,8 +179,44 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
             intent.putExtra("QUIZNAME", quiz.getName());
             intent.putExtra("RESULT", quiz.findMaxResult());
+            intent.putExtra("USER_ID", userID);
+            intent.putExtra("USER_NAME", usernameString);
             startActivity(intent);
         }
 
+    }
+
+    /**
+     * This overridden method will handle and display the menu for the Profile Activity.
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_result, menu);
+        return true;
+    }
+
+    /**
+     * This method will handle when something in the menu is clicked.
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Variable initialization:
+        Intent intent;
+
+        // Switch statement to handle cases:
+        switch (item.getItemId()) {
+            case R.id.action_backToProfile:
+                intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                intent.putExtra("USER_ID", userID);
+                intent.putExtra("USER_NAME", usernameString);
+                startActivity(intent);
+        }
+        return true;
     }
 }

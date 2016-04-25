@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 Log.d("LoginActivity", "Login Button Clicked");
                 if (inDB(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
                     Intent intent = new Intent(this, ProfileActivity.class);
-                    intent.putExtra("userId", user.getId());
-                    intent.putExtra("username", user.getUserName());
+                    intent.putExtra("USER_ID", user.getId());
+                    intent.putExtra("USER_NAME", user.getUserName());
                     startActivity(intent);
                 } else {
                     incorrect.setVisibility(View.VISIBLE);

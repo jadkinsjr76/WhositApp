@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.jackadkins.whosit.TakeQuizActivity">
+
+    <!-- Provide a logout button for users, if room. -->
+    <item
+        android:id="@+id/action_backToProfile"
+        android:title="@string/action_backToProfile"
+        android:icon="@drawable/ic_close_white_48dp"
+        app:showAsAction="ifRoom"
+        style="?android:borderlessButtonStyle" />
+
+</menu>
