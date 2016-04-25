@@ -245,12 +245,13 @@ public class WhosItDB {
     }
 
     public ArrayList<Question> getQuestions(int quizID) {
-        String where = QUIZ_ID + " = ?";
+        String where = QUESTION_QUIZ_ID + "= ?";
         String[] whereArgs = { Integer.toString(quizID) };
 
         this.openReadableDB();
         Cursor cursor = db.query(QUESTION_TABLE, null, where, whereArgs, null, null, null);
         ArrayList<Question> questions = new ArrayList<Question>();
+        Log.d("WhosItDB", Integer.toString(cursor.getCount()));
         while (cursor.moveToNext()) {
             questions.add(getQuestionFromCursor(cursor));
         }
